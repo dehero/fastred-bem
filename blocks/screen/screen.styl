@@ -1,0 +1,66 @@
+@require root
+
+$json = json('./screen.json', {hash: true})
+
+$screen__max-width_mobile     ?= $json.screen__max-width_mobile
+$screen__max-width_tablet     ?= $json.screen__max-width_tablet
+$screen__max-width_desktop    ?= $json.screen__max-width_desktop
+$screen__max-width_hd         ?= $json.screen__max-width_hd
+$screen__scrollbar-max-width  ?= $json.screen__scrollbar-max-width
+
+screen__wider($width)
+  if unit($width) == 'rem'
+    $width = unit($width * $root__font-size, 'px')
+
+  // Fixing vertical scrollbar not excluded from screen width in some browsers
+  $width = $width + $screen__scrollbar-max-width
+
+  condition = 'only screen and (min-width: %s)' % ($width)
+
+  @media condition
+    {block}
+
+screen__wider_mobile()
+  +screen__wider($screen__max-width_mobile)
+    {block}
+
+screen__wider_tablet()
+  +screen__wider($screen__max-width_tablet)
+    {block}
+
+screen__wider_desktop()
+  +screen__wider($screen__max-width_desktop)
+    {block}
+
+
+screen__narrower_hd()
+  +screen__narrower($screen__max-width_hd)
+    {block}
+
+screen__narrower($width)
+  if unit($width) == 'rem'
+    $width = unit($width * $root__font-size, 'px')
+
+  // Fixing vertical scrollbar not excluded from screen width in some browsers
+  $width = $width + $screen__scrollbar-max-width
+
+  condition = 'only screen and (max-width: %s)' % ($width)
+
+  @media condition
+    {block}
+
+screen__narrower_mobile()
+  +screen__narrower($screen__max-width_mobile)
+    {block}
+
+screen__narrower_tablet()
+  +screen__narrower($screen__max-width_tablet)
+    {block}
+
+screen__narrower_desktop()
+  +screen__narrower($screen__max-width_desktop)
+    {block}
+
+screen__narrower_hd()
+  +screen__narrower($screen__max-width_hd)
+    {block}

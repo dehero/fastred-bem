@@ -1,0 +1,24 @@
+//-
+    items
+    groups
+    plain
+
+- fastredRequire('css', 'template', 'var')
+
+mixin items(items)
+    if items
+        each item in items
+            .toolbar__item(class = cssBemClassArr({'toolbar__item_spring': item.spring}))
+                if varIsHash(item)
+                    != templateToHtml(item.template, item, item.attributes)
+                else
+                    = item
+
+- attributes.class = cssBemClassArr(attributes.class, {'toolbar_plain': options.plain})
+
+.toolbar&attributes(attributes)
+    +items(options.items)
+    if options.groups
+        each group in options.groups
+            .toolbar__group(class = cssBemClassArr({'toolbar__group_align_': group.align}))
+                +items(group.items)

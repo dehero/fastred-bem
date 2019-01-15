@@ -1,0 +1,45 @@
+@require input
+@require 'radio/radio'
+
+$top-offset = (($radio__font-size * $radio__line-height - $radio__size) / 2)
+
+.radio
+  display inline-block
+  user-select none
+  font-size $radio__font-size
+  line-height $radio__line-height
+  outline none
+
+  &:focus .radio__label:before
+    input__focus(true)
+
+.radio__label
+  position relative
+  cursor pointer
+  display inline-block
+
+  &:before
+    box-sizing border-box
+    content ''
+    width $radio__size
+    height $radio__size
+    display inline-block
+    position absolute
+    background $radio__tick-color
+    border ($radio__size * .5) solid $radio__bg-color
+    border-radius $radio__size
+    top $top-offset
+
+.radio__input
+  display none
+
+  &:checked + .radio__label
+    position relative
+
+  &:checked + .radio__label:before
+    background $radio__tick-color
+    border-width $radio__size * .2
+
+.radio__title
+  display inline-block
+  margin-left $radio__size * 1.5

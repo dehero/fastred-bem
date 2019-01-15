@@ -1,0 +1,16 @@
+//- @pugdoc
+    name: select
+    options:
+        - {array} data
+        - selectedValue
+
+- fastredRequire('var')
+
+if varIsHash(options.data)
+    - title = options.data.title
+    - value = options.data.value
+else
+    - title = options.data
+    - value = options.data
+
+option.select__item(value=value selected=(options.selectedValue==value))= title

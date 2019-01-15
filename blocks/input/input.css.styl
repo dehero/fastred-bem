@@ -1,0 +1,51 @@
+@require 'input/input'
+
+.input
+  if $input__border-size > 0
+    border $input__border-size solid $input__border-color
+  else
+    border none
+  background $input__bg
+  color $input__text-color
+  border-radius $input__border-radius
+  outline none
+  overflow hidden
+  word-wrap break-word
+  margin 0
+  padding $input__padding_v $input__padding_h
+  box-sizing border-box
+  font inherit
+  font-size $input__font-size
+  line-height normal
+  display inline-block
+  vertical-align middle
+
+  &:focus
+    input__focus()
+
+  &_spring
+    width 100%
+
+  &_size
+
+    &_s
+      font-size $input__font-size_s
+
+    &_l
+      font-size $input__font-size_l
+
+    &_xl
+      font-size $input__font-size_xl
+
+  &_cut
+
+    &_right
+      border-top-right-radius  0
+      border-bottom-right-radius 0
+
+    &_both
+      border-radius 0
+
+    &_left
+      border-top-left-radius 0
+      border-bottom-left-radius 0

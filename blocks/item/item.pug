@@ -1,0 +1,27 @@
+//- @pugdoc
+    name: item
+    description: Item for listview or treeview
+    options:
+        - {string} value
+        - {array} items
+        - {bool} selected
+        - {string} type
+        - {bool} header
+        - {integer} depth
+        - {bool} expanded
+
+- fastredRequire('css', 'locale', 'template', 'var')
+
+- attributes.class = cssBemClassArr(attributes.class, {'item_selected': options.selected, 'item_type_': options.type, 'item_header': options.header})
+
+- value = varIsHash(options.data) ? options.data.value : options.data
+
+.item&attributes(attributes)(data-value=value)
+    if options.depth > 0
+        .item__field.item__button(class='item__button_depth_' + options.depth)
+            if varIsNotEmpty(options.data.items)
+                != templateToHtml('font-icon', {id: 'arrow-down'})
+    if options.header
+        .item__field= localeGetStr('header')
+    else
+        .item__field= value

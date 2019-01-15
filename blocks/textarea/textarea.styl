@@ -1,0 +1,13 @@
+@require input
+
+$json = json('./textarea.json', {hash: true})
+
+$textarea__bg                 ?= $input__bg
+$textarea__border-color       ?= $input__border-color
+$textarea__border-radius      ?= $input__border-radius
+$textarea__border-size        ?= $input__border-size
+$textarea__text-color         ?= $input__text-color
+$textarea__font-size          ?= $input__font-size
+$textarea__padding_h          ?= $input__padding_h
+$textarea__padding_v          ?= .65rem
+$textarea__line-count_min     ?= $json.textarea__line-count_min

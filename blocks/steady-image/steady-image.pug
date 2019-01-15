@@ -1,0 +1,31 @@
+//-
+    url
+    width
+    height
+    lazyload
+    responsive
+    link
+    description
+    title
+
+- fastredRequire('css', 'float', 'var')
+
+- attributes.class = cssBemClassArr(attributes.class, {'steady-image_lazyload': options.lazyload, 'steady-image_responsive': options.responsive})
+
+mixin content(options)
+    - heightPercent = floatGetRound(options.height / options.width * 100)
+    div.steady-image__placeholder(style={'padding-bottom': floatToStr(heightPercent) + '%'})
+    if varIsNotEmpty(options.url)
+        if options.lazyload
+            img.steady-image__image(data-src=options.url)
+            noscript
+                img.steady-image__image(src=options.url title=options.title alt=options.description)
+        else
+            img.steady-image__image(src=options.url title=options.title alt=options.description)
+
+if varIsNotEmpty(options.link)
+    a.steady-image(style={'width': options.width + 'px'} href=options.link)&attributes(attributes)
+        +content(options)
+else
+    div.steady-image(style={'width': options.width + 'px'})&attributes(attributes)
+        +content(options)

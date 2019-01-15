@@ -1,0 +1,16 @@
+//-
+    title
+    name
+    value
+    checked
+
+- fastredRequire('int')
+
+- inputId = intCounter()
+- inputId = 'radio_' + inputId
+
+.radio(tabindex=0)&attributes(attributes)
+    input.radio__input(id=inputId type='radio' value=options.value name=options.name checked=options.checked)
+    label.radio__label(for=inputId)
+        if options.title
+            span.radio__title!= options.title

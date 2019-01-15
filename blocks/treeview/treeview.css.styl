@@ -1,0 +1,57 @@
+@require input
+@require treeview
+@require screen
+
+.treeview
+  position relative
+  display block
+  border-radius $treeview__border-radius
+  if $treeview__border-size > 0
+    border $treeview__border-size solid $treeview__border-color
+  else
+    border none
+  background $treeview__bg
+  outline none
+  overflow hidden
+
+  &_spring
+    width 100%
+
+  &:focus
+    input__focus(true)
+
+.treeview__item
+  display flex
+  flex-flow row wrap
+  width 100%
+
+.treeview__group
+  display flex
+  flex-flow row wrap
+  width 100%
+
+.treeview__content
+  display flex
+  flex-flow row wrap
+  justify-content flex-start
+  align-items flex-start
+  align-content flex-start
+
+.treeview_expanse
+  display flex
+  flex-flow column nowrap
+  align-items stretch
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+
+  .treeview__header
+    flex-shrink 0
+    padding-right $screen__scrollbar-max-width
+
+  .treeview__content
+    overflow hidden
+    overflow-y scroll
+    flex-grow 1

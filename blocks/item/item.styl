@@ -1,0 +1,72 @@
+@require color
+
+$json = json('./item.json', {hash: true})
+
+$item__type_table            ?= $json.item__type_table
+$item__type_list             ?= $json.item__type_list
+$item__type_grid             ?= $json.item__type_grid
+
+$item__border-radius         ?= 0
+
+$item__padding_h             ?= 1rem
+$item__padding_v             ?= .5rem
+
+$item__bg_hover              ?= alpha($color_main, 5%)
+$item__bg_pressed            ?= alpha($color_main, 25%)
+$item__bg_selected           ?= $color_main
+$item__bg_selected-pressed   ?= $color_main-pressed
+$item__border-color_selected ?= transparent
+
+$item__text-color_selected   ?= white
+
+$item__bg_header             ?= $color_panel
+$item__text-color_header     ?= $color_text
+
+item__padding()
+  padding $item__padding_v $item__padding_h
+
+item_selected()
+  border-color $item__border-color_selected
+  background $item__bg_selected
+  color $item__text-color_selected
+
+  &:hover
+    background $item__bg_selected
+
+  &:active
+    background $item__bg_selected-pressed
+
+item()
+  display block
+  border 1px solid transparent
+  border-radius $item__border-radius
+  cursor pointer
+  user-select none
+  -webkit-tap-highlight-color transparent
+
+  &:hover
+    background $item__bg_hover
+
+  &:active
+    background $item__bg_pressed
+
+  &_selected
+    item_selected()
+
+  &:last-child
+    margin-bottom 0
+
+item__cell()
+  display block
+  flex-shrink 0
+  overflow hidden
+  item__padding()
+
+item_type_list()
+  width 100%
+
+item_type_table()
+  width 100%
+  display flex
+  flex-flow row nowrap
+  align-items center

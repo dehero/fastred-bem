@@ -1,0 +1,6 @@
+{
+    "item__type_grid": ["grid"],
+    "item__type_list": ["list"],
+    "item__type_table": ["table"],
+    "item__type_default": "list"
+}

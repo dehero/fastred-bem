@@ -1,0 +1,7 @@
+{
+    "screen__max-width_mobile": "400px",
+    "screen__max-width_tablet": "800px",
+    "screen__max-width_desktop": "1050px",
+    "screen__max-width_hd": "1800px",
+    "screen__scrollbar-max-width": "17px"
+}

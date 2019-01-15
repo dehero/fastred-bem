@@ -1,0 +1,23 @@
+- fastredRequire('arr', 'var', 'pgn', 'url', 'obj')
+
+- showCount = varExists(options.showCount) ? options.showCount : true
+- map = pgnGetMaxCountMap(options.pagination)
+
+.pagination&attributes(attributes)
+    if arrGetCount(map) > 0
+        .pagination__nav
+            .button-group
+                each value, key in map
+                    a.button.button_inverted.button-group__item(href=urlFromCtrl('page', objGetMerged(options.pagination.params, {pgnPage: key}), options.pagination.anchor) class=key == options.pagination.page ? 'is-active' : null)
+                        if value
+                            = key + 1
+                        else
+                            | ...
+    if showCount && options.pagination.count
+        - shownCount = pgnGetShownCount(options.pagination)
+        span.pagination__count
+            if shownCount != options.pagination.count
+                = localeGetStr('found-1-shown-2', [options.pagination.count, shownCount])
+            else
+                = localeGetStr('found-1', [options.pagination.count])
+            = crossVar

@@ -1,0 +1,45 @@
+@require item
+
+.item
+  item()
+
+  &_header
+    display none
+    background $item__bg_header
+    color $item__text-color_header
+
+for key, value in $item__type_table
+
+  .item_type_{value}
+
+    item_type_table()
+
+    &.item_header
+      display block
+
+for key, value in $item__type_list
+
+  .item_type_{value}
+
+    item_type_table()
+
+.item__field
+  item__cell()
+
+.item__button
+
+  text-align right
+
+  &_depth
+
+    &_1
+      width 1rem
+
+    &_2
+      width 3rem
+
+    &_3
+      width 5rem
+
+    &_4
+      width 7rem

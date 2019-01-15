@@ -1,0 +1,1 @@
+require.context('./../../locales', false, /\.json$/);

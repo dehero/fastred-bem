@@ -1,0 +1,75 @@
+@require helper
+@require 'toolbar/toolbar'
+
+/*
+.toolbar
+  overflow hidden
+
+  &_nowrap
+    white-space nowrap
+
+.toolbar__wrapper
+  margin-top - $toolbar__gutter
+  margin-right - $toolbar__gutter
+  text-align left
+  line-height 1
+  helper__clearfix()
+
+
+.toolbar__item
+  display inline-block
+  margin $toolbar__gutter $toolbar__gutter 0 0
+  line-height 1
+  vertical-align baseline
+
+.toolbar__group
+  display inline-block
+
+  &_align_right
+    float right
+
+*/
+
+.toolbar
+  display $toolbar__display
+  flex-flow row wrap
+  align-items baseline
+  background $toolbar__bg-color
+  if $toolbar__border-size > 0
+    border $toolbar__border-size solid $toolbar__border-color
+  else
+    border none
+  border-radius $toolbar__border-radius
+  padding ($toolbar__gutter / 2)
+
+  &_nowrap
+    flex-wrap nowrap
+
+    .toolbar__group
+      white-space nowrap
+
+    .toolbar__item
+      white-space nowrap
+
+  &_plain
+    margin - $toolbar__gutter
+    background none
+    border none
+
+.toolbar__item
+  display inline-block
+  padding ($toolbar__gutter / 2)
+  line-height 1
+
+  &_spring
+    flex-grow 1
+
+.toolbar__group
+  display inline-block
+
+  &_align_right
+    margin-left auto
+    margin-right 0
+
+    & + &
+      margin-left 0

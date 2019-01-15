@@ -1,0 +1,115 @@
+@require input
+@require root
+@require screen
+
+@require 'popup/popup'
+
+.popup__window
+  background $popup__window-bg
+  display flex
+  flex-flow column nowrap
+  position relative
+  width 100%
+  margin 0
+
+  +screen__wider_mobile()
+    min-width $popup__window-min-width
+    width auto
+    border-radius $popup__border-radius
+
+  //+screen__wider_tablet()
+  //  max-width $screen__max-width_tablet
+
+  +screen__wider_desktop()
+    max-width $screen__max-width_desktop
+
+.popup__header
+  padding $popup__padding_v $popup__padding_h
+
+.popup__title
+  line-height 1
+  font-size $popup__title-font-size
+
+.popup__close
+  float right
+
+  $radius = $screen__scrollbar-max-width + $root__font-size * 3
+  $color = alpha(invert($popup__bg), 1)
+  $bg = mix($popup__bg, transparent)
+
+  &_free
+    display inline-flex
+    float none
+    position fixed
+    color alpha($color, 75%)
+    right 0
+    top 0
+    background $bg
+    border none
+    border-bottom-left-radius $radius
+    z-index 1000
+    padding $screen__scrollbar-max-width
+    padding-left 2em
+    padding-bottom 2em
+    margin 0
+    box-sizing content-box
+
+    &:active, &:hover
+      color $color
+
+    &:focus
+      input__focus(false, $bg)
+
+.popup__content
+  position relative
+  display block
+  padding 0 $popup__padding_h
+
+.popup__footer
+  padding $popup__padding_v $popup__padding_h
+
+.popup
+  background $popup__bg
+  display none
+  position fixed
+  overflow auto
+  left 0
+  right 0
+  top 0
+  bottom 0
+  z-index 999
+  padding $popup__offset_v $popup__offset_v
+  justify-content center
+  align-items top
+
+  &_modal
+    z-index 9999
+
+  &_align
+
+    &_middle
+      //align-items center
+
+      .popup__window
+        margin auto
+
+    &_client
+      align-items stretch
+
+      .popup__content
+        overflow auto
+        flex-grow 1
+        position relative
+
+  &_spring
+
+    .popup__window
+      width 100%
+
+  &_plain
+
+    .popup__window
+      background transparent
+
+    .popup__content
+      padding 0

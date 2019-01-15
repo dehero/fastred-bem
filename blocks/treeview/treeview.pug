@@ -1,0 +1,12 @@
+- fastredRequire('arr', 'css', 'template', 'var')
+
+- type = options.type
+- itemTemplate = varIsStr(options.itemTemplate) ? options.itemTemplate : 'item'
+
+- attributes.class = cssBemClassArr(attributes.class, {treeview_expanse: options.expanse, treeview_spring: options.spring})
+
+.treeview&attributes(attributes)(tabindex=0)
+    .treeview__content
+        if varIsNotEmpty(options.items)
+            each item in options.items
+                != templateToHtml('treeview__item', {itemTemplate: itemTemplate, item: item, depth: 1})

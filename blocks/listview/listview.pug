@@ -1,0 +1,28 @@
+//- @pugdoc
+    name: listview
+    description: List view of different types
+    options:
+        - {type} itemTemplate
+        - {array} items
+        - {string} itemTemplate
+        - {bool} modeLocked
+        - {array} mode
+        - {integer} multiselect
+        - {bool} expanse
+        - {bool} spring
+
+- fastredRequire('arr', 'css', 'template', 'var')
+
+- type = options.type
+//-arrGetFound(frontendVar('listview__type'), options.type, frontendVar('listview__type_default'))
+- itemTemplate = varIsStr(options.itemTemplate) ? options.itemTemplate : 'item'
+
+- attributes.class = cssBemClassArr(attributes.class, {listview_expanse: options.expanse, listview_spring: options.spring})
+
+.listview&attributes(attributes)(data-mode-locked=options.modeLocked data-multiselect=options.multiselect data-mode=options.mode data-item-template=options.itemTemplate data-type=options.type tabindex=0)
+    .listview__header-wrapper
+        != templateToHtml(itemTemplate, {type: type, header: true}, 'listview__header')
+    .listview__content
+        if options.items
+            each item in options.items
+                != templateToHtml(itemTemplate, {data: item, type: type})

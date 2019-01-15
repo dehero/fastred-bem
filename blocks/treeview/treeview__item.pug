@@ -1,0 +1,7 @@
+
+.treeview__item
+    != templateToHtml(options.itemTemplate, {data: options.item, type: 'list', depth: options.depth})
+    if varIsNotEmpty(options.item.items)
+        .treeview__group
+            each item in options.item.items
+                != templateToHtml('treeview__item', {itemTemplate: options.itemTemplate, item: item, depth: options.depth + 1})

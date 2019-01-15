@@ -1,0 +1,6 @@
+@require font-family
+
+$json = json('./root.json', {hash: true})
+
+$root__font-family  ?= $font-family_system
+$root__font-size    ?= $json.root__font-size

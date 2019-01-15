@@ -1,0 +1,34 @@
+//- @pugdoc
+    name: select
+    options:
+        - {array} items
+        - {array} groups
+        - {string} size
+        - {bool} spring
+        - {string} cut
+        - value
+
+- fastredRequire('css', 'id', 'template', 'var')
+
+- attributes.class = cssBemClassArr(attributes.class, {'select_spring': options.spring, 'select_size_': size, 'select_cut_': options.cut})
+
+//- id = 'select_' + intCounter()
+
+mixin items(items, selectedValue)
+    if varIsNumericArr(items)
+        each item in items
+            != templateToHtml('select__item', {data: item, selectedValue: selectedValue})
+    else
+        each item, value in items
+            != templateToHtml('select__item', {data: {title: item, value: value}, selectedValue: selectedValue})
+
+select.select(id=id name=options.name)&attributes(attributes)
+    if options.items
+        +items(options.items, options.value)
+    if options.groups
+        each group in options.groups
+            optgroup.select__group(label=group.title)
+                +items(group.items, options.value)
+
+//-label(for=id)
+.select__caret!= templateToHtml('font-icon', {id: 'arrow-down'})

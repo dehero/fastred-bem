@@ -1,0 +1,23 @@
+//-
+    title
+    content
+    toolbar
+    align
+    spring
+
+- fastredRequire('arr', 'css', 'template', 'var')
+
+- attributes.class = cssBemClassArr(attributes.class, {'popup_align_': options.align, 'popup_spring': options.spring, 'popup_plain': options.plain})
+
+.popup&attributes(attributes)
+    .popup__window
+        if varIsNotEmpty(options.title)
+            .popup__header
+                != templateToHtml('button', {icon: 'close', plain: true}, 'popup__close')
+                .popup__title= options.title
+        else
+            != templateToHtml('button', {icon: 'close'}, {class: ['popup__close', 'popup__close_free']})
+        .popup__content!= options.content
+        if options.toolbar
+            .popup__footer
+                != templateToHtml('toolbar', options.toolbar)

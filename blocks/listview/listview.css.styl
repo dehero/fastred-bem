@@ -1,0 +1,47 @@
+@require input
+@require listview
+@require screen
+
+.listview
+  position relative
+  display block
+  border-radius $listview__border-radius
+  if $listview__border-size > 0
+    border $listview__border-size solid $listview__border-color
+  else
+    border none
+  background $listview__bg
+  outline none
+  overflow hidden
+
+  &_spring
+    width 100%
+
+  &:focus
+    input__focus(true)
+
+.listview__content
+  display flex
+  flex-flow row wrap
+  justify-content flex-start
+  align-items flex-start
+  align-content flex-start
+
+.listview_expanse
+  display flex
+  flex-flow column nowrap
+  align-items stretch
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+
+  .listview__header-wrapper
+    flex-shrink 0
+    margin-right $screen__scrollbar-max-width
+
+  .listview__content
+    overflow hidden
+    overflow-y scroll
+    flex-grow 1

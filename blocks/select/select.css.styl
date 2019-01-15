@@ -1,0 +1,93 @@
+@require input
+@require 'select/select'
+
+.select
+  if $select__border-size > 0
+    border $select__border-size solid $select__border-color
+  else
+    border none
+  background $select__bg
+  color $select__text-color
+  border-radius $select__border-radius
+  outline none
+  overflow hidden
+  word-wrap break-word
+  margin 0
+  padding $select__padding_v $select__padding_h
+  padding-right $select__caret-size_h + $select__padding_h * 2
+  box-sizing border-box
+  font inherit
+  font-size $select__font-size
+  line-height normal
+  text-transform none
+  appearance none
+  cursor pointer
+  display inline-block
+  vertical-align middle
+
+  &::-ms-expand
+    display none
+
+  &:focus
+    input__focus()
+
+  &_spring
+    width 100%
+
+  &_spring
+    width 100%
+
+  &_size
+
+    &_s
+      font-size $select__font-size_s
+
+    &_l
+      font-size $select__font-size_l
+
+    &_xl
+      font-size $select__font-size_xl
+
+  &_cut
+
+    &_right
+      border-top-right-radius  0
+      border-bottom-right-radius 0
+
+    &_both
+      border-radius 0
+
+    &_left
+      border-top-left-radius 0
+      border-bottom-left-radius 0
+
+.select__caret
+  padding $select__padding_v $select__padding_h
+  margin $select__border-size
+  margin-left (- $select__caret-size_h) - $select__padding_h * 2
+  width $select__caret-size_h + $select__padding_h * 2
+  //background $select__caret-bg
+  color $select__text-color
+  border-radius $select__border-radius
+  border-top-left-radius 0
+  border-bottom-left-radius 0
+  cursor pointer
+  display inline-block
+  pointer-events none
+  line-height normal
+  box-sizing border-box
+  vertical-align top
+
+.select__item
+  padding 0//$select__padding_v $select__padding_h
+  //padding-right $select__caret-size_h + $select__padding_h * 2
+  min-height 0
+
+  &:selected
+    background $select__bg-color_selected
+    color $select__text-color_selected
+
+.select__group
+  font inherit
+  color inherit
+  margin 0

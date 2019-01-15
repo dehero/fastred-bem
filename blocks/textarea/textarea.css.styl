@@ -1,0 +1,29 @@
+@require input
+@require 'textarea/textarea'
+
+.textarea
+  if $textarea__border-size > 0
+    border $textarea__border-size solid $textarea__border-color
+  else
+    border none
+  background $textarea__bg
+  color $textarea__text-color
+  font-size $textarea__font-size
+  border-radius $textarea__border-radius
+  outline none
+  overflow hidden
+  word-wrap break-word
+  margin 0
+  padding $textarea__padding_v $textarea__padding_h
+  box-sizing border-box
+  font inherit
+  //max-width 40em + $textarea__padding_h * 2
+
+  &:focus
+    input__focus()
+
+  &_autosize
+    resize none
+
+  &_spring
+    width 100%
