@@ -1,0 +1,22 @@
+@require 'breadcrumbs/breadcrumbs'
+
+.breadcrumbs
+  list-style none
+  padding 0
+  margin 0
+
+.breadcrumbs__item
+  display inline-block
+  vertical-align top
+  color $breadcrumbs__text-color
+
+  &:after
+    content $breadcrumbs__delimiter
+    margin 0 .5em
+
+  &:last-child:after
+    display none
+
+.breadcrumbs__link
+  color $breadcrumbs__link-color
+  text-decoration none

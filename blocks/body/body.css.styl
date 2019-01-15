@@ -1,0 +1,32 @@
+@require screen
+
+@require 'body/body'
+
+.body
+  display block
+  color $body__text-color
+  background $body__bg
+  padding $body__padding_v $body__padding_h
+  margin 0
+  appearance none
+  height 100%
+
+  &_scrollbar-override
+    padding-right $screen__scrollbar-max-width
+    position relative
+    overflow hidden
+
+    &.body_header-fixed
+
+      .body__header
+        padding-right $screen__scrollbar-max-width
+
+  &_header-fixed
+    padding-top $body__padding_v + $body__header-height
+
+    .body__header
+      position fixed
+      top 0
+      left 0
+      right 0
+      z-index 50

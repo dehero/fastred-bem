@@ -1,0 +1,18 @@
+//-
+    name
+    value
+    syntax
+    toolbar
+    printMargin
+    wordWrap
+    gutter
+
+- fastredRequire('arr', 'frontend-var', 'template')
+
+- syntax = arrGetFound(frontendVar('code-editor__syntax'), options.syntax, 'text')
+
+.code-editor(data-syntax=syntax data-print-margin=options.printMargin data-word-wrap=options.wordWrap data-gutter=options.gutter tabindex=0)&attributes(attributes)
+    if options.toolbar
+        != templateToHtml('toolbar', options.toolbar, 'code-editor__toolbar')
+    pre.code-editor__content= options.value
+    textarea.code-editor__textarea(name=options.name)= options.value

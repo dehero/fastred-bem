@@ -1,0 +1,16 @@
+//-
+    title
+    name
+    value
+    checked
+
+- fastredRequire('int')
+
+- inputId = intCounter()
+- inputId = 'checkbox_' + inputId
+
+.checkbox(tabindex=0)&attributes(attributes)
+    input.checkbox__input(id=inputId type='checkbox' name=options.name value=options.value checked=options.checked)
+    label.checkbox__label(for=inputId)
+        if options.title
+            span.checkbox__title!= options.title

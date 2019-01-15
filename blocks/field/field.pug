@@ -1,0 +1,24 @@
+//-
+    title
+    template
+    attributes
+    name
+    hint
+    size
+    labelClass
+    controlClass
+
+- fastredRequire('int', 'obj', 'template', 'var')
+
+- title = varIsNotEmpty(options.title) ? options.title : options.name
+- size = arrGetFound(['s', 'l', 'xl'], options.size)
+- controlAttributes = templateAttrsToObj(options.attributes)
+- controlAttributes.id = 'field_' + intCounter()
+- attributes.class = cssBemClassArr(attributes.class, {'field_size_': size})
+
+.field&attributes(attributes)
+    label.field__label(for=controlAttributes.id class=options.labelClass)!= title
+    .field__control(class=options.controlClass)
+        != templateToHtml(options.template, options, controlAttributes)
+        if options.hint
+            p.field__hint!= options.hint

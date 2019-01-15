@@ -1,0 +1,40 @@
+@require 'dropdown/dropdown'
+
+.dropdown
+  position relative
+  display inline-flex
+  align-items center
+  cursor pointer
+
+.dropdown__menu
+  display none
+  position absolute
+  top 100%
+  left 0
+  z-index 1000
+  background $dropdown__bg
+  if $dropdown__border-size > 0
+    border $dropdown__border-size solid $dropdown__border-color
+  else
+    border none
+  border-radius $dropdown__border-radius
+  padding $dropdown__padding_v $dropdown__padding_h
+  cursor auto
+
+.dropdown_align_right
+
+  .dropdown__menu
+    right 0
+    left auto
+
+.dropdown_pressed
+
+  .dropdown__menu
+    display block
+
+.dropdown_hover
+
+  &:hover
+
+    .dropdown__menu
+      display block

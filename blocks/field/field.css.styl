@@ -1,0 +1,33 @@
+@require field
+@require input
+
+.field
+  display flex
+  flex-flow row wrap
+  margin 0
+  margin-bottom $field__margin
+  align-items flex-start
+
+.field__label
+  padding-right $field__margin
+  padding-bottom ($field__margin / 2)
+  min-width 12em
+  font-size $input__font-size
+
+.field_size
+
+  &_s
+    .field__label
+      font-size $input__font-size_s
+
+  &_l
+    .field__label
+      font-size $input__font-size_l
+
+  &_xl
+    .field__label
+      font-size $input__font-size_xl
+
+.field__control
+  flex-grow 1
+  display flex

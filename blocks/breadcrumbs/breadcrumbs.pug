@@ -1,0 +1,16 @@
+//- items
+
+- fastredRequire('arr', 'obj')
+
+- itemCount = arrGetCount(options.items)
+if itemCount > 1
+    ul.breadcrumbs&attributes(attributes)
+        - counter = 0
+        each item in options.items
+            - counter++
+            li.breadcrumbs__item
+                if counter >= itemCount
+                    = item.title
+                else
+                    a.breadcrumbs__link(href=item.url)
+                        = item.title

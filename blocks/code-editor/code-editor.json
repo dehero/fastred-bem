@@ -1,0 +1,6 @@
+{
+    "code-editor__padding_h": "0.5rem",
+    "code-editor__font-size": "1rem",
+    "code-editor__line-count_min": 3,
+    "code-editor__syntax": ["text"]
+}

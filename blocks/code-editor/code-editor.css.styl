@@ -1,0 +1,155 @@
+@require color
+@require input
+
+@require 'code-editor/code-editor'
+
+.code-editor
+  if $code-editor__border-size > 0
+    border $code-editor__border-size solid $code-editor__border-color
+  else
+    border none
+  background $code-editor__bg
+  color $code-editor__text-color
+  font-size $code-editor__font-size
+  border-radius $code-editor__border-radius
+  outline none
+
+  &:focus, &_focused
+    input__focus()
+
+.code-editor__textarea
+  display none
+
+.code-editor__toolbar
+  padding $code-editor__padding_v $code-editor__padding_h
+
+.code-editor__content
+  white-space pre-wrap
+  position relative
+  min-height $code-editor__line-height * $code-editor__line-count_min
+  margin $code-editor__padding_v 0
+  // Imitating horizontal offset for all lines
+  padding 0 $code-editor__padding_h
+  display inline-block
+  width 100%
+
+  // Imitating selected first line before Ace has loaded
+  &:before
+    content ''
+    display block
+    position absolute
+    left 0
+    right 0
+    top 0
+    height $code-editor__line-height
+    z-index 1
+    background rgba(215,215,215,0.031)
+
+// Убираем горизонтальный отступ и выделение первой строки, когда загрузился Ace
+  &.ace_editor
+    padding 0
+
+    &:before
+      display none
+
+  .ace_gutter
+    background #232323
+    color #929292
+
+  .ace_print-margin
+    width 1px
+    background #232323
+
+  .ace_cursor
+    color $code-editor__text-color
+    border-width 1px !important
+
+  .ace_marker-layer
+
+    .ace_selection
+      background $code-editor__color-selection
+
+    .ace_step
+      background rgb(102, 82, 0)
+
+    .ace_bracket
+      margin -1px 0 0 -1px
+      border 1px solid #BFBFBF
+
+    .ace_active-line
+      background rgba(215, 215, 215, 0.031)
+
+    .ace_selected-word
+      border 1px solid #000000
+
+  &.ace_multiselect
+
+    .ace_selection
+
+      &.ace_start
+        box-shadow 0 0 3px 0 #191919
+
+  .ace_gutter-active-line
+    background-color rgba(215, 215, 215, 0.031)
+
+  .ace_invisible
+    color #666
+
+  .ace_keyword
+
+    &.ace_operator
+      color #4B4B4B
+
+    &.ace_other
+
+      &.ace_unit
+        color #366F1A
+
+  .ace_constant
+
+    &.ace_language
+      color #39946A
+
+    &.ace_numeric
+      color #46A609
+
+    &.ace_character
+
+      &.ace_entity
+        color #A165AC
+
+  .ace_invalid
+    color #FFFFFF
+    background-color #E92E2E
+
+  .ace_fold
+    background-color #927C5D
+    border-color #929292
+
+  .ace_string
+    color #5D90CD
+
+  .ace_blockquote
+    color $color_main
+
+  .ace_comment
+    color #3C403B
+
+  .ace_indent-guide
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYHB3d/8PAAOIAdULw8qMAAAAAElFTkSuQmCC') right repeat-y;
+
+  .ace_keyword,
+  .ace_meta,
+  .ace_support.ace_constant.ace_property-value
+    color #927C5D
+
+  .ace_storage,
+  .ace_support.ace_class,
+  .ace_support.ace_function,
+  .ace_support.ace_other,
+  .ace_support.ace_type
+    color #E92E2E
+
+  .ace_entity.ace_name.ace_tag,
+  .ace_entity.ace_other.ace_attribute-name
+    color #606060

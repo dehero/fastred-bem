@@ -1,0 +1,20 @@
+@require field
+@require field-columns
+
+.field-columns
+  display flex
+  flex-wrap wrap
+  //margin (- $field__margin / 2) (- $field-columns__gutter / 2)
+  margin 0 (- $field-columns__gutter / 2)
+
+.field-columns__item
+  display block
+  flex-grow 1
+  //margin ($field__margin / 2) ($field-columns__gutter / 2)
+  margin 0 ($field-columns__gutter / 2)
+
+  //& > *:first-child
+//    margin-top 0
+
+//  & > *:last-child
+//    margin-bottom 0

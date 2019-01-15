@@ -1,0 +1,32 @@
+@require field
+@require input
+
+@require 'field-group/field-group'
+
+.field-group
+  display block
+  margin 0
+  margin-bottom $field-group__margin
+  background $field-group__bg-color
+  padding $field-group__padding_v $field-group__padding_h
+  if $field-group__border-size > 0
+    border $field-group__border-size solid $field-group__border-color
+  else
+    border none
+  border-radius $field-group__border-radius
+
+  & > *:last-child
+    margin-bottom 0
+
+.field-group__title
+  display block
+  font-size 1rem + ($input__padding_v * 2)
+  line-height 1
+  float left
+  width 100%
+  padding 0 0 ($input__padding_v * 2) 0
+  margin  0 0 $field__margin 0
+
+  & + *
+    clear both
+

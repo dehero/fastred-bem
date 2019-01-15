@@ -1,0 +1,54 @@
+@require input
+
+@require 'checkbox/checkbox'
+
+$top-offset = (($checkbox__font-size * $checkbox__line-height - $checkbox__size) / 2)
+
+.checkbox
+  user-select none
+  display inline-block
+  font-size $checkbox__font-size
+  line-height $checkbox__line-height
+  outline none
+  min-width $checkbox__size
+  min-height $checkbox__size
+
+  &:focus .checkbox__label:before
+    input__focus(true)
+
+.checkbox__label
+  cursor pointer
+  position relative
+  display inline-block
+  outline none
+
+  &:before
+    content ''
+    width $checkbox__size
+    height $checkbox__size
+    display inline-block
+    background $checkbox__bg
+    border-radius $checkbox__border-radius
+    position absolute
+    top $top-offset
+
+.checkbox__input
+  display none
+
+  &:checked + .checkbox__label:after
+    display block
+    content ''
+    position absolute
+    width $checkbox__size * .5
+    height $checkbox__size * .2
+    background transparent
+    top $top-offset + $checkbox__size * .18
+    left $checkbox__size * .2
+    border ($checkbox__size * .2) solid $checkbox__tick-color
+    border-top none
+    border-right none
+    transform rotate(-45deg)
+
+.checkbox__title
+  display inline-block
+  margin-left $checkbox__size * 1.5

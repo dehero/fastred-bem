@@ -1,0 +1,129 @@
+@require input
+@require helper
+
+@require 'button/button'
+
+.button
+  display inline-flex
+  flex-flow row nowrap
+  align-items baseline
+  white-space nowrap
+  color $button__text-color
+  background $button__bg
+  background-clip padding-box
+  margin 0
+  padding $button__padding_v $button__padding_h
+  if $button__border-size > 0
+    border $button__border-size solid $button__border-color
+  else
+    border none
+  border-radius $button__border-radius
+  text-decoration none
+  cursor pointer
+  outline none
+  max-width 100%
+  box-sizing border-box
+  text-align left
+  overflow hidden
+  text-overflow ellipsis
+  font inherit
+  font-size $button__font-size
+  line-height normal
+  vertical-align middle
+  -webkit-tap-highlight-color transparent
+
+  &:-moz-focusring
+    outline none
+
+  &:focus
+    input__focus()
+    z-index 1
+
+  &:active
+    button__pressed()
+
+  //&:hover
+  //  background $button__bg_hover
+
+  &_disabled, &:disabled
+    opacity .6
+    pointer-events none
+    cursor default
+
+  &_main
+    background $button__bg_main
+    color $button__text-color_main
+    if $button__border-size > 0
+      border-color $button__border-color_main
+
+    &:active
+      background $button__bg_main-pressed
+      color $button__text-color_main-pressed
+      if $button__border-size > 0
+        border-color $button__border-color_main-pressed
+
+  &_plain
+    background none
+    color $button__text-color_plain
+    border none
+    margin (- $button__padding_v)  (- $button__padding_h)
+    box-sizing content-box
+
+    &:active
+      border none
+      background none
+      color $button__text-color_plain-pressed
+
+    &.button_main
+      color $button__text-color_plain-main
+
+      &:active
+        border none
+        background none
+        color $button__text-color_plain-main
+
+  &_size
+
+    &_s
+      font-size $button__font-size_s
+
+    &_l
+      font-size $button__font-size_l
+
+    &_xl
+      font-size $button__font-size_xl
+
+  &_cut
+
+    &_right
+      border-top-right-radius  0
+      border-bottom-right-radius 0
+
+    &_both
+      border-radius 0
+      margin-left 0 - $button__border-size
+
+    &_left
+      border-top-left-radius 0
+      border-bottom-left-radius 0
+      margin-left 0 - $button__border-size
+
+.button__icon
+  //display inline-block
+  //display inline
+  height auto
+  vertical-align middle
+  line-height normal
+  //align-items center
+
+  & + .button__title
+    margin-left .5em
+
+//.button__title
+  //vertical-align middle
+
+.button__input
+  display none
+
+  &:checked + .button
+    button__pressed()

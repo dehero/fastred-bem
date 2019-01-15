@@ -1,0 +1,37 @@
+//-
+    items
+    size
+    plain
+    toggle
+    name
+    value
+
+- fastredRequire('arr', 'var')
+
+- name = options.name
+
+if varIsEmpty(name) && options.toggle == 'radio'
+    - fastredRequire('int')
+    - name = 'button-group_' + intCounter()
+
+.button-group&attributes(attributes)
+    - end = arrGetCount(options.items)
+    - end = end - 1
+
+    each item, index in options.items
+        case index
+            when 0
+                - cut = 'right'
+            when end
+                - cut = 'left'
+            default
+                - cut = 'both'
+
+        if varIsHash(item)
+            - title = item.title
+            - value = item.value
+        else
+            - title = item
+            - value = item
+
+        != templateToHtml('button', {title: title, icon: item.icon, size: options.size, plain: options.plain, toggle: options.toggle, value: value, cut: cut, name: name, checked: value == options.value}, 'button-group__item')
