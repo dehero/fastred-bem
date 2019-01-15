@@ -1,6 +1,6 @@
 {
   "name": "fastred-bem",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Web development bootstrap with extendable BEM blocks, Fastred modules and Webpack configuration.",
   "author": "Dehero",
   "license": "ISC",
