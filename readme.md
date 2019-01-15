@@ -1,6 +1,6 @@
 # Fastred-BEM
 
-> Visual component library for PHP server and JavaScript frontend.
+> Web development bootstrap with extendable BEM blocks, Fastred modules and Webpack configuration.
 
 Based on:
 
@@ -20,6 +20,25 @@ Components:
 - pug-php
 - Fastred
 
+## JavaScript
+
+### Requirements
+
+* Webpack
+
+### Installation
+
+    npm install fastred-bem
+    
+## PHP
+
+### Requirements
+
+* [PHP 5.3+](http://www.php.net/downloads.php)
+
+### Installation
+
+    composer require dehero/fastred-bem
 ## File structure of block
 
 Common block file structure looks like this:
