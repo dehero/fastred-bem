@@ -1,4 +1,6 @@
-Frontend and backend framework
+# Fastred-DEM
+
+> Visual component library for PHP server and JavaScript frontend.
 
 Based on:
 
