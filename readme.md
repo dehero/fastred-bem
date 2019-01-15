@@ -1,4 +1,4 @@
-# Fastred-DEM
+# Fastred-BEM
 
 > Visual component library for PHP server and JavaScript frontend.
 
