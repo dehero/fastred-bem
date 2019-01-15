@@ -1,0 +1,27 @@
+{
+    "name": "dehero/fastred-bem",
+	"license": "MIT",
+	"version": "0.2.0",
+    "keywords": ["framework"],
+    "homepage": "https://github.com/dehero/fastred-bem",
+    "type": "library",
+    "authors": [
+        {
+            "name": "dehero",
+            "email": "dehero@outlook.com",
+            "homepage": "http://github.com/dehero",
+            "role": "Developer"
+        }
+    ],
+	"require": {
+        "php": ">=5.3.0",
+        "dehero/fastred": "^0.1.0",
+        "pug-php/pug": "^2.7.1"
+    },
+    "autoload": {
+        "files": ["fastred-bem.php"]
+    },
+	"archive": {
+        "exclude": ["/blocks/", "/modules/*.js", "/package.json"]
+    }
+}

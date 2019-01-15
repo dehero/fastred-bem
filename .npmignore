@@ -1,0 +1,4 @@
+.idea
+modules/*.php
+composer.json
+fastred-bem.php
