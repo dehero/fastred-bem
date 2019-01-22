@@ -11,7 +11,8 @@ function ListView() {
     };
     this.events = {
         selectionChange: 'item-select.listview',
-        itemOpen:        'item-open.listview'
+        itemOpen:        'item-open.listview',
+        modeChange:      'mode-change.listview'
     };
 
     var dataKeys = {
@@ -174,6 +175,7 @@ function ListView() {
             if (value !== currentMode) {
                 that.clearSelection(component);
                 $(component).data(dataKeys.mode, value);
+                $component.trigger(that.events.modeChange);
             }
 
             return value;
