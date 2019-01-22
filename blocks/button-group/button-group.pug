@@ -1,6 +1,7 @@
 //-
     items
     size
+    disabled
     plain
     toggle
     name
@@ -34,4 +35,4 @@ if varIsEmpty(name) && options.toggle == 'radio'
             - title = item
             - value = item
 
-        != templateToHtml('button', {title: title, icon: item.icon, size: options.size, plain: options.plain, toggle: options.toggle, value: value, cut: cut, name: name, checked: value == options.value}, 'button-group__item')
+        != templateToHtml('button', {title: title, icon: item.icon, size: options.size, plain: options.plain, toggle: options.toggle, value: value, cut: cut, name: name, checked: value == options.value, disabled: options.disabled}, 'button-group__item')
