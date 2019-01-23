@@ -20,6 +20,7 @@ function Item() {
 
     var that = this;
     var $ = require('jquery');
+    require('mark.js/dist/jquery.mark.js');
 
     require('item/item.css.styl');
     template(this.template, require('item/item.pug'));
@@ -32,6 +33,22 @@ function Item() {
 
     this.open = function(component) {
 
+    };
+
+    this.search = function(component, value) {
+        var $component = $(component);        
+
+        $component.unmark();
+        if (value) {
+            $component.mark(String(value), {
+                wildcards: 'withSpaces',
+                done: function(count) {
+                    $component.toggle(count > 0);    
+                }
+            });
+        } else {
+            $component.toggle(true);
+        }
     };
 
     this.selectedToggle = function(component) {
