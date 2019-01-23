@@ -11,8 +11,7 @@ function ListView() {
     };
     this.events = {
         selectionChange: 'item-select.listview',
-        itemOpen:        'item-open.listview',
-        modeChange:      'mode-change.listview'
+        itemOpen:        'item-open.listview'
     };
 
     var dataKeys = {
@@ -20,6 +19,7 @@ function ListView() {
         modeLocked:     'mode-locked',
         mode:           'mode',
         multiselect:    'multiselect',
+        search:         'search',
         tapholdItem:    'taphold-item',
         type:           'type'
     };
@@ -30,7 +30,8 @@ function ListView() {
     template(this.template, require('listview/listview.pug'));
 
     this.add = function(component, items) {
-        that.insert(component, items, that.count(component));
+        that.insert(component, items, that.count(component));   
+        that.research(component);    
     };
 
     this.clear = function(component) {
@@ -92,6 +93,7 @@ function ListView() {
 
         $component.data('$content', $content);
         $component.data('ItemComponent', ItemComponent);
+        that.research($component);
 
         $component.keyup(function(e) {
             switch(e.keyCode) {
@@ -175,7 +177,6 @@ function ListView() {
             if (value !== currentMode) {
                 that.clearSelection(component);
                 $(component).data(dataKeys.mode, value);
-                $component.trigger(that.events.modeChange);
             }
 
             return value;
@@ -198,6 +199,31 @@ function ListView() {
         });
 
         ItemComponent.open(items.length == 1 ? items[0] : items);
+    };
+
+    this.research = function(component) {
+        var $component = $(component);
+        var ItemComponent = $component.data('ItemComponent');
+        var $content = $component.data('$content');
+        var oldValue = that.search($component);
+
+        $content.children().each(function() {
+            ItemComponent.search(this, oldValue);
+        });
+    };
+
+    this.search = function(component, value) {
+        var $component = $(component);
+        var oldValue = $component.data(dataKeys.search);
+
+        if (typeof value !== 'undefined') {    
+            if (oldValue !== value) {
+                $component.data(dataKeys.search, value);
+                that.research(component);
+            }            
+        } else {
+            return oldValue;
+        }
     };
 
     this.selection = function(component, value, noEvent) {
@@ -225,7 +251,6 @@ function ListView() {
     this.type = function(component, value) {
         var $component = $(component);
         var oldValue = $component.data(dataKeys.type);
-
 
         if (typeof value !== 'undefined') {
             var ItemComponent = $component.data('ItemComponent');
