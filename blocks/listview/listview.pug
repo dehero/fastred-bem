@@ -10,6 +10,7 @@
         - {integer} multiselect
         - {bool} expanse
         - {bool} spring
+        - {string} search
 
 - fastredRequire('arr', 'css', 'template', 'var')
 
@@ -19,7 +20,7 @@
 
 - attributes.class = cssBemClassArr(attributes.class, {listview_expanse: options.expanse, listview_spring: options.spring})
 
-.listview&attributes(attributes)(data-mode-locked=options.modeLocked data-multiselect=options.multiselect data-mode=options.mode data-item-template=options.itemTemplate data-type=options.type tabindex=0)
+.listview&attributes(attributes)(data-mode-locked=options.modeLocked data-multiselect=options.multiselect data-mode=options.mode data-item-template=options.itemTemplate data-type=options.type data-search=options.search tabindex=0)
     .listview__header-wrapper
         != templateToHtml(itemTemplate, {type: type, header: true}, 'listview__header')
     .listview__content
