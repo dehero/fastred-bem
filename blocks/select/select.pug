@@ -22,13 +22,14 @@ mixin items(items, selectedValue)
         each item, value in items
             != templateToHtml('select__item', {data: {title: item, value: value}, selectedValue: selectedValue})
 
-select.select(id=id name=options.name)&attributes(attributes)
-    if options.items
-        +items(options.items, options.value)
-    if options.groups
-        each group in options.groups
-            optgroup.select__group(label=group.title)
-                +items(group.items, options.value)
+.select&attributes(attributes)
+    select.select__input(id=id name=options.name)
+        if options.items
+            +items(options.items, options.value)
+        if options.groups
+            each group in options.groups
+                optgroup.select__group(label=group.title)
+                    +items(group.items, options.value)
 
-//-label(for=id)
-.select__caret!= templateToHtml('font-icon', {id: 'arrow-down'})
+    //-label(for=id)
+    .select__caret!= templateToHtml('font-icon', {id: 'arrow-down'})
