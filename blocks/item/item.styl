@@ -57,10 +57,14 @@ item()
     margin-bottom 0
 
 item__cell()
-  display block
-  flex-shrink 1
+  display block  
+  flex-shrink 0
   overflow hidden
   item__padding()
+
+item__cell_spring()
+  flex-shrink 1
+  flex-grow 1  
 
 item_type_list()
   width 100%
