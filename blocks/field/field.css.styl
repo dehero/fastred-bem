@@ -1,3 +1,4 @@
+@require color
 @require field
 @require input
 
@@ -32,3 +33,8 @@
   flex-grow 1
   display flex
   flex-flow column nowrap
+
+.field__hint
+  color $color_muted
+  margin-top $field__margin * .5
+  margin-bottom 0
