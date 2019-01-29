@@ -36,7 +36,9 @@ function ListView() {
     };
 
     this.canOpenSelection = function(component) {
-        var items = that.getSelectedItems(component);
+        var $component = $(component);
+        var ItemComponent = $component.data('ItemComponent');        
+        var items = that.getSelectedItems($component);
 
         return ItemComponent.canOpen(items.length == 1 ? items[0] : items);
     };
@@ -49,7 +51,9 @@ function ListView() {
     };
 
     this.deleteSelection = function(component) {
-        var items = that.getSelectedItems(component);
+        var $component = $(component);
+        var ItemComponent = $component.data('ItemComponent');        
+        var items = that.getSelectedItems($component);
 
         ItemComponent.delete(items);
     };
@@ -201,7 +205,9 @@ function ListView() {
     };
 
     this.openSelection = function(component) {
-        var items = that.getSelectedItems(component);
+        var $component = $(component);
+        var ItemComponent = $component.data('ItemComponent');        
+        var items = that.getSelectedItems($component);
 
         ItemComponent.open(items.length == 1 ? items[0] : items);
     };
