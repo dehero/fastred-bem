@@ -8,6 +8,12 @@ function Select() {
     var $ = require('jquery');
     this.events = {
         change: 'change.select'
+    };
+    var selectors = {
+        control: '.select__control'
+    };
+    var dataKeys = {
+        $control: '$control'
     }
 
     require('font-icon');
@@ -21,14 +27,18 @@ function Select() {
 
     this.init = function(component) {
         var $component = $(component);
+        var $control = $component.find(selectors.control);
 
-        $component.change(function(e) {
+        $component.data(dataKeys.$control, $control);
+
+        $control.change(function(e) {
             $component.trigger(that.events.change);
         });
     }
 
     this.insert = function(component, item, position) {
         var $component = $(component);
+        var $control = $component.data(dataKeys.$control);
 
         var items = varIsArr(item) ? item : [item];
         var position = position || 0;
@@ -39,19 +49,23 @@ function Select() {
         }
 
         if(position <= 0) {
-            $(components).prependTo($component);
+            $(components).prependTo($control);
         } else {
-            var $previous = $component.children().eq(position - 1);
+            var $previous = $control.children().eq(position - 1);
             $(components).insertAfter($previous);
         }
     }
 
     this.clear = function(component) {
-        $(component).empty();
+        var $control = $(component).data(dataKeys.$control);
+
+        $control.empty();
     }
 
     this.count = function(component) {
-        $(component).children().length;
+        var $control = $(component).data(dataKeys.$control);
+
+        return $control.children().length;
     }
 
     Input.register(this);
