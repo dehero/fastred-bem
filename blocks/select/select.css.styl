@@ -1,7 +1,12 @@
 @require input
 @require 'select/select'
 
-.select__input
+.select_spring
+
+  .select__control
+    width 100%
+
+.select__control
   if $select__border-size > 0
     border $select__border-size solid $select__border-color
   else
@@ -30,12 +35,6 @@
 
   &:focus
     input__focus()
-
-  &_spring
-    width 100%
-
-  &_spring
-    width 100%
 
   &_size
 
