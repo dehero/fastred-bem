@@ -35,6 +35,12 @@ function ListView() {
         that.research(component);    
     };
 
+    this.canOpenSelection = function(component) {
+        var items = that.getSelectedItems(component);
+
+        return ItemComponent.canOpen(items.length == 1 ? items[0] : items);
+    };
+
     this.clear = function(component) {
         var $component = $(component);
         var $content = $component.data('$content');
@@ -43,6 +49,12 @@ function ListView() {
     };
 
     this.deleteSelection = function(component) {
+        var items = that.getSelectedItems(component);
+
+        ItemComponent.delete(items);
+    };
+
+    this.getSelectedItems = function(component) {
         var $component = $(component);
         var ItemComponent = $component.data('ItemComponent');
         var $content = $component.data('$content');
@@ -53,10 +65,10 @@ function ListView() {
             if (ItemComponent.selected(this)) {
                 items.push(this);
             }
-        });
-
-        ItemComponent.delete(items);
-    };
+        });  
+        
+        return items;
+    }    
 
     this.insert = function(component, item, position) {
         var $component = $(component);
@@ -189,17 +201,7 @@ function ListView() {
     };
 
     this.openSelection = function(component) {
-        var $component = $(component);
-        var ItemComponent = $component.data('ItemComponent');
-        var $content = $component.data('$content');
-
-        var items = [];
-
-        $content.children().each(function() {
-            if (ItemComponent.selected(this)) {
-                items.push(this);
-            }
-        });
+        var items = that.getSelectedItems(component);
 
         ItemComponent.open(items.length == 1 ? items[0] : items);
     };
