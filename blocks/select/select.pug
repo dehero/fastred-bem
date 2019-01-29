@@ -8,11 +8,9 @@
         - {string} cut
         - value
 
-- fastredRequire('css', 'id', 'template', 'var')
+- fastredRequire('css', 'template', 'var')
 
 - attributes.class = cssBemClassArr(attributes.class, {'select_spring': options.spring, 'select_size_': size, 'select_cut_': options.cut})
-
-//- id = 'select_' + intCounter()
 
 mixin items(items, selectedValue)
     if varIsNumericArr(items)
@@ -23,7 +21,7 @@ mixin items(items, selectedValue)
             != templateToHtml('select__item', {data: {title: item, value: value}, selectedValue: selectedValue})
 
 .select&attributes(attributes)
-    select.select__input(id=id name=options.name)
+    select.select__control(name=options.name)
         if options.items
             +items(options.items, options.value)
         if options.groups
@@ -31,5 +29,4 @@ mixin items(items, selectedValue)
                 optgroup.select__group(label=group.title)
                     +items(group.items, options.value)
 
-    //-label(for=id)
     .select__caret!= templateToHtml('font-icon', {id: 'arrow-down'})
