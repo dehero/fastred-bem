@@ -31,6 +31,10 @@ function Item() {
         $(components).remove();
     };
 
+    this.canOpen = function(component) {
+        return typeof that.value(component) !== 'undefined';
+    };
+
     this.open = function(component) {
 
     };
