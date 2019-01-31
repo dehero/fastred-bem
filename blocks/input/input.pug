@@ -1,11 +1,14 @@
-//-
-    name
-    value
-    type
-    spring
-    size
-    cut
-    readonly
+//- @pugdoc
+    name: input
+    options: 
+        - {string} name
+        - {string} value
+        - {string} type
+        - {bool} spring
+        - {string} size
+        - {string} cut
+        - {bool} readonly
+        - {string} placeholder
 
 - fastredRequire('arr', 'css')
 
@@ -13,4 +16,4 @@
 - type = arrGetFound(['password'], options.type)
 - attributes.class = cssBemClassArr(attributes.class, {'input_spring': options.spring, 'input_size_': size, 'input_cut_': options.cut})
 
-input.input(value=options.value type=type name=options.name readonly=options.readonly)&attributes(attributes)
+input.input(value=options.value type=type name=options.name readonly=options.readonly placeholder=options.placeholder)&attributes(attributes)
