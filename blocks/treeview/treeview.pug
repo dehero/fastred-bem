@@ -5,7 +5,7 @@
 
 - attributes.class = cssBemClassArr(attributes.class, {treeview_expanse: options.expanse, treeview_spring: options.spring})
 
-.treeview&attributes(attributes)(tabindex=0)
+.treeview&attributes(attributes)(data-item-template=options.itemTemplate tabindex=0)
     .treeview__content
         if varIsNotEmpty(options.items)
             each item in options.items
