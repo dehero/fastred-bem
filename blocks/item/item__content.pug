@@ -1,0 +1,10 @@
+//- @pugdoc
+    name: item__content
+    options:
+        - {bool} header
+        - {object} data
+
+if options.header
+    .item__field= localeGetStr('header')
+else
+    .item__field= data
