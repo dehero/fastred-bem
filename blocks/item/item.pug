@@ -13,15 +13,14 @@
 - fastredRequire('css', 'locale', 'template', 'var')
 
 - attributes.class = cssBemClassArr(attributes.class, {'item_selected': options.selected, 'item_type_': options.type, 'item_header': options.header})
-
+- contentTemplate = varIsNotEmpty(options.contentTemplate) ? options.contentTemplate : 'item__content'
 - value = varIsHash(options.data) ? options.data.value : options.data
 
 .item&attributes(attributes)(data-value=value)
+
     if options.depth > 0
         .item__field.item__button(class='item__button_depth_' + options.depth)
             if varIsNotEmpty(options.data.items)
                 != templateToHtml('font-icon', {id: 'arrow-down'})
-    if options.header
-        .item__field= localeGetStr('header')
-    else
-        .item__field= value
+
+    != templateToHtml(contentTemplate, options)
