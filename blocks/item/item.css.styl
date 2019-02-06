@@ -4,24 +4,29 @@
   item()
 
   &_header
-    display none
+    display block
     background $item__bg_header
     color $item__text-color_header
 
 for key, value in $item__type_table
 
   .item_type_{value}
-
     item_type_table()
-
-    &.item_header
-      display block
 
 for key, value in $item__type_list
 
   .item_type_{value}
+    item_type_list()
 
-    item_type_table()
+    &.item_header
+      display none
+
+for key, value in $item__type_grid
+
+  .item_type_{value}
+
+    &.item_header
+      display none      
 
 .item__field
   item__cell()
