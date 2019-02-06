@@ -20,10 +20,10 @@ function Item() {
 
     var that = this;
     var $ = require('jquery');
-    require('mark.js/dist/jquery.mark.js');
 
     require('item/item.css.styl');
     template(this.template, require('item/item.pug'));
+    template('item__content', require('item/item__content.pug'));
 
     this.delete = function(components) {
         components = varIsArr(components) ? components : [components];
@@ -31,28 +31,14 @@ function Item() {
         $(components).remove();
     };
 
-    this.canOpen = function(component) {
-        return typeof that.value(component) !== 'undefined';
-    };
-
     this.open = function(component) {
 
     };
 
     this.search = function(component, value) {
-        var $component = $(component);        
-
-        $component.unmark();
-        if (value) {
-            $component.mark(String(value), {
-                wildcards: 'withSpaces',
-                done: function(count) {
-                    $component.toggle(count > 0);    
-                }
-            });
-        } else {
-            $component.toggle(true);
-        }
+        var $component = $(component);
+        
+        $component.toggle($component.text().indexOf(value) > -1);
     };
 
     this.selectedToggle = function(component) {
