@@ -1,15 +1,14 @@
 var Component = require('component');
+var json = require('item/item.json');
 
 function loadTypes() {
-    var result = [];
+    var result = {};
 
-    var types = require('item/item.json');    
-
-    for (var key in types) {
-        var arr = types[key];
+    for (var key in json) {
+        var arr = json[key];
         if (varIsArr(arr)) {
             for (var i = 0; i < arr.length; i++) {
-                result.push('item_type_' + arr[i])
+                result[arr[i]] = 'item_type_' + arr[i];
             }
         }
     }
@@ -90,7 +89,7 @@ function Item() {
 
     this.type = function(component, value) {
         var $component = $(component);
-        var oldValue = 'list';
+        var oldValue = json.item__type_default;
 
         for (var key in this.classes.types) {
             if ($component.hasClass(this.classes.types[key])) {
