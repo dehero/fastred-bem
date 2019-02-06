@@ -1,16 +1,29 @@
 var Component = require('component');
 
+function loadTypes() {
+    var result = [];
+
+    var types = require('item/item.json');    
+
+    for (var key in types) {
+        var arr = types[key];
+        if (varIsArr(arr)) {
+            for (var i = 0; i < arr.length; i++) {
+                result.push('item_type_' + arr[i])
+            }
+        }
+    }
+
+    return result;
+}
+
 function Item() {
     this.template = 'item';
     this.selector = '.item';
     this.classSelected = 'item_selected';
 
     this.classes = {
-        types: {
-            table:  'item_type_table',
-            list:   'item_type_list',
-            grid:   'item_type_grid'
-        }
+        types: loadTypes()
     };
 
     this.events = {
@@ -20,6 +33,7 @@ function Item() {
 
     var that = this;
     var $ = require('jquery');
+    require('mark.js/dist/jquery.mark.js');
 
     require('item/item.css.styl');
     template(this.template, require('item/item.pug'));
