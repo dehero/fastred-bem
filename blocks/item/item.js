@@ -31,14 +31,28 @@ function Item() {
         $(components).remove();
     };
 
+    this.canOpen = function(component) {
+        return typeof that.value(component) !== 'undefined';
+    };
+
     this.open = function(component) {
 
     };
 
     this.search = function(component, value) {
-        var $component = $(component);
-        
-        $component.toggle($component.text().indexOf(value) > -1);
+        var $component = $(component);        
+
+        $component.unmark();
+        if (value) {
+            $component.mark(String(value), {
+                wildcards: 'withSpaces',
+                done: function(count) {
+                    $component.toggle(count > 0);    
+                }
+            });
+        } else {
+            $component.toggle(true);
+        }
     };
 
     this.selectedToggle = function(component) {
