@@ -7,7 +7,8 @@ function ListView() {
     var that = this;
     var $ = window.jQuery = require('jquery');
     var selectors = {
-        content:        '.listview__content'
+        content:        '.listview__content',
+        header:         '.listview__header'
     };
     this.events = {
         selectionChange: 'item-select.listview',
@@ -106,9 +107,11 @@ function ListView() {
     this.init = function(component) {
         var $component = $(component);
         var $content = $component.find(selectors.content);
+        var $header = $component.find(selectors.header);
         var ItemComponent = Component.findRegistered($component.data(dataKeys.itemTemplate) || 'item');
 
         $component.data('$content', $content);
+        $component.data('$header', $header);
         $component.data('ItemComponent', ItemComponent);
         that.research($component);
 
@@ -178,10 +181,6 @@ function ListView() {
 
     this.multiselect = function(component) {
         return typeof $(component).attr('data-' + dataKeys.multiselect) !== 'undefined';
-    };
-
-    this.type = function(component) {
-        return arrGetFound(['list', 'grid', 'table'], $(component).data(dataKeys.type), 'list');
     };
 
     this.mode = function(component, value) {
@@ -266,9 +265,13 @@ function ListView() {
         if (typeof value !== 'undefined') {
             var ItemComponent = $component.data('ItemComponent');
             var $content = $component.data('$content');
+            var $header = $component.data('$header');
 
             if (oldValue !== value) {
                 $content.children().each(function() {
+                    ItemComponent.type(this, value);
+                });
+                $header.children().each(function() {
                     ItemComponent.type(this, value);
                 });
                 $component.data(dataKeys.type, value);
