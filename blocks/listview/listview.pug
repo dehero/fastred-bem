@@ -22,7 +22,7 @@
 
 .listview&attributes(attributes)(data-mode-locked=options.modeLocked data-multiselect=options.multiselect data-mode=options.mode data-item-template=options.itemTemplate data-type=options.type data-search=options.search tabindex=0)
     .listview__header
-        != templateToHtml(itemTemplate, {type: type, header: true})
+        != templateToHtml(itemTemplate, {data: {}, type: type, header: true})
     .listview__content
         if options.items
             each item in options.items
