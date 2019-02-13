@@ -1,5 +1,6 @@
 @require color
 @require input
+@require toolbar 
 
 @require 'code-editor/code-editor'
 
@@ -21,7 +22,8 @@
   display none
 
 .code-editor__toolbar
-  padding $code-editor__padding_v $code-editor__padding_h
+  padding $code-editor__padding_v $code-editor__padding_h 0 $code-editor__padding_h
+  margin - ($toolbar__gutter / 2)
 
 .code-editor__content
   white-space pre-wrap
