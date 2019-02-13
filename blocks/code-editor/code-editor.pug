@@ -1,11 +1,13 @@
-//-
-    name
-    value
-    syntax
-    toolbar
-    printMargin
-    wordWrap
-    gutter
+//- @pugdoc
+    name: code-editor 
+    options
+        - {string} name 
+        - {string} value
+        - {string} syntax
+        - {object} toolbar
+        - {integer} printMargin
+        - {bool} wordWrap
+        - {bool} gutter
 
 - fastredRequire('arr', 'frontend-var', 'template')
 
@@ -13,6 +15,7 @@
 
 .code-editor(data-syntax=syntax data-print-margin=options.printMargin data-word-wrap=options.wordWrap data-gutter=options.gutter tabindex=0)&attributes(attributes)
     if options.toolbar
+        - options.toolbar.plain = true
         != templateToHtml('toolbar', options.toolbar, 'code-editor__toolbar')
     pre.code-editor__content= options.value
     textarea.code-editor__textarea(name=options.name)= options.value
