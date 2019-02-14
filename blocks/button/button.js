@@ -1,4 +1,4 @@
-var Component = require('component');
+var Component = require('component'); 
 
 function Button() {
     this.template = 'button';
@@ -16,6 +16,7 @@ function Button() {
     require('font-icon');
     require('button/button.css.styl');
     template(this.template, require('button/button.pug'));
+    template('button__content', require('button/button__content.pug'));
 
     this.disabled = function(component, value) {
         var $component = $(component);
