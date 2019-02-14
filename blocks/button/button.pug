@@ -1,17 +1,19 @@
-//-
-    title
-    icon
-    url
-    labelFor
-    disabled
-    size
-    plain
-    main
-    toggle
-    name
-    value
-    checked
-    hint
+//- @pugdoc
+    name: button
+    options:
+        - {string} title
+        - {string} icon
+        - {string} url
+        - {string} labelFor
+        - {bool} disabled
+        - {string} size
+        - {bool} plain
+        - {bool} main
+        - {string} toggle
+        - {string} name
+        - {string} value
+        - {bool} checked
+        - {string} hint
 
 - fastredRequire('arr', 'css', 'template', 'var')
 
@@ -19,6 +21,7 @@
 - attributes.class = cssBemClassArr(attributes.class, {'button_plain': options.plain, 'button_main': options.main, 'button_disabled': options.disabled, 'button_size_': options.size, 'button_cut_': options.cut})
 - tabindex = options.disabled ? -1 : 0
 - labelFor = options.labelFor
+- contentTemplate = varIsNotEmpty(options.contentTemplate) ? options.contentTemplate : 'button__content'
 
 if varIsEmpty(labelFor)
     if arrIncludes(['radio', 'checkbox'], options.toggle)
@@ -27,22 +30,12 @@ if varIsEmpty(labelFor)
 
         input.button__input(id=labelFor type=options.toggle name=options.name value=options.value checked=options.checked)
 
-mixin button-content(options)
-    if varIsNotEmpty(options.icon)
-        span.button__icon
-            != templateToHtml('font-icon', {id: options.icon})
-        //-!= templateToHtml('font-icon', {id: options.icon}, 'button__icon')
-        if varIsNotEmpty(options.title)
-            != ' '
-    if varIsNotEmpty(options.title)
-        span.button__title= options.title
-
 if varIsNotEmpty(labelFor)
     label.button(for=labelFor role='button' tabindex=tabindex title = options.hint)&attributes(attributes)
-        +button-content(options)
+        != templateToHtml(contentTemplate, options)        
 else if varIsStr(options.url)
     a.button(href=options.url role='link' tabindex=tabindex title = options.hint)&attributes(attributes)
-        +button-content(options)
+        != templateToHtml(contentTemplate, options)
 else
     button.button(disabled=options.disabled title=options.hint)&attributes(attributes)
-        +button-content(options)
+        != templateToHtml(contentTemplate, options)
