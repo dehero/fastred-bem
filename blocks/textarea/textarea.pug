@@ -1,12 +1,15 @@
-//-
-    value
-    name
-    autosize
-    spring
+//- @pugdoc
+    name: textarea
+    options: 
+        - {string} value
+        - {string} name
+        - {bool} autosize
+        - {bool} spring
+        - {string} placeholder
 
 - fastredRequire('css', 'var')
 
 - autosize = varExists(options.autosize) ? options.autosize : true
 - attributes.class = cssBemClassArr(attributes.class, {'textarea_autosize': autosize, 'textarea_spring': options.spring})
 
-textarea.textarea(rows=frontendVar('textarea__line-count_min') name=options.name)&attributes(attributes)!= options.value
+textarea.textarea(rows=frontendVar('textarea__line-count_min') name=options.name placeholder=options.placeholder)&attributes(attributes)!= options.value
