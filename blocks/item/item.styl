@@ -6,8 +6,6 @@ $item__type_table            ?= $json.item__type_table
 $item__type_list             ?= $json.item__type_list
 $item__type_grid             ?= $json.item__type_grid
 
-$item__border-radius         ?= 0
-
 $item__padding_h             ?= 1rem
 $item__padding_v             ?= .5rem
 
@@ -15,6 +13,9 @@ $item__bg_hover              ?= alpha($color_main, 5%)
 $item__bg_pressed            ?= alpha($color_main, 25%)
 $item__bg_selected           ?= $color_main
 $item__bg_selected-pressed   ?= $color_main-pressed
+
+$item__border-radius         ?= 0
+$item__border-size           ?= 0
 $item__border-color_selected ?= transparent
 
 $item__text-color_selected   ?= white
@@ -38,7 +39,10 @@ item_selected()
 
 item()
   display block
-  border 1px solid transparent
+  if $item__border-size > 0
+    border $item__border-size solid transparent
+  else
+    border none
   border-radius $item__border-radius
   cursor pointer
   user-select none
@@ -70,7 +74,7 @@ item_type_list()
   width 100%
   display flex
   flex-flow row nowrap
-  align-items center
+  align-items stretch
 
 item_type_table()
   width 100%
