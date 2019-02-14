@@ -1,0 +1,15 @@
+//- @pugdoc
+    name: button__content
+    options:
+        - {string} icon
+        - {string} title
+
+- fastredRequire('template')
+
+if varIsNotEmpty(options.icon)
+    span.button__icon
+        != templateToHtml('font-icon', {id: options.icon})
+    if varIsNotEmpty(options.title)
+        != ' '
+if varIsNotEmpty(options.title)
+    span.button__title= options.title
