@@ -1,5 +1,12 @@
-//- id, valign
+//- @pugdoc
+    name: font-icon
+    options: 
+        - {string} id
+        - {string} valign
+
 - fastredRequire('arr', 'css')
+
 - valign = arrGetFound(['baseline', 'top'], options.valign)
 - attributes.class = cssBemClassArr(attributes.class, {'font-icon_id_': options.id, 'font-icon_valign_': valign})
+
 span.font-icon&attributes(attributes)
