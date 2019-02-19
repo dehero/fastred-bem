@@ -1,22 +1,3 @@
-window.localeGetStr = function(key, args, pluralInt) {
-    var values = localeGetStrObj();
-    var str = values[key];
-
-    if (varIsNumber(args)) pluralInt = args;
-
-    if (varIsNumber(pluralInt)) {
-        str = localeIntGetPlural(pluralInt, str);
-    }
-
-    if (args !== null) {
-        fastredRequire('str');
-
-        return strGetFormatted(str, args);
-    }
-
-    return varIsNotEmpty(str) ? str : key;
-};
-
 window.localeGetStrObj = function() {
     var key = locale();
 
