@@ -94,6 +94,7 @@ function Item() {
         for (var key in this.classes.types) {
             if ($component.hasClass(this.classes.types[key])) {
                 oldValue = key;
+                break;
             }
         }
 
