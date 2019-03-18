@@ -1,5 +1,9 @@
 @require 'dropdown/dropdown'
 
+$dropdown__bubble-position  = 20%
+$dropdown__bubble-offset    = .75rem
+$dropdown__z-index = 99
+
 .dropdown
   position relative
   display inline-flex
@@ -11,21 +15,53 @@
   position absolute
   top 100%
   left 0
-  z-index 1000
+  z-index $dropdown__z-index
   background $dropdown__bg
   if $dropdown__border-size > 0
     border $dropdown__border-size solid $dropdown__border-color
   else
     border none
   border-radius $dropdown__border-radius
-  padding $dropdown__padding_v $dropdown__padding_h
   cursor auto
+
+.dropdown_bubble.dropdown_pressed
+
+  .dropdown__menu
+    margin-left - $dropdown__bubble-offset
+    margin-top $dropdown__bubble-offset
+
+  &:after
+    content ' '
+    position absolute
+    background $dropdown__bg
+    if $dropdown__border-size > 0
+      border-left $dropdown__border-size solid $dropdown__border-color
+      border-top $dropdown__border-size solid $dropdown__border-color      
+    else
+      border none
+    width $dropdown__bubble-offset
+    height $dropdown__bubble-offset
+    z-index $dropdown__z-index + 1
+    bottom - $dropdown__bubble-offset
+    left 0    
+    transform rotate(45deg)
+    transform-origin left bottom
 
 .dropdown_align_right
 
   .dropdown__menu
     right 0
     left auto
+
+  &.dropdown_bubble
+
+    .dropdown__menu
+      margin-right - $dropdown__bubble-offset
+      margin-left auto
+    
+    &:after
+      right 0
+      left auto
 
 .dropdown_pressed
 
