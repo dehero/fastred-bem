@@ -22,19 +22,23 @@
 - tabindex = options.disabled ? -1 : 0
 - labelFor = options.labelFor
 - contentTemplate = varIsNotEmpty(options.contentTemplate) ? options.contentTemplate : 'button__content'
+- pressed = options.checked
 
 if varIsEmpty(labelFor)
     if arrIncludes(['radio', 'checkbox'], options.toggle)
         - fastredRequire('int')
         - labelFor = 'button_' + intCounter()
+        - pressed = false
 
         input.button__input(id=labelFor type=options.toggle name=options.name value=options.value checked=options.checked)
 
+- attributes.class = cssBemClassArr(attributes.class, {'button_pressed': pressed})
+
 if varIsNotEmpty(labelFor)
-    label.button(for=labelFor role='button' tabindex=tabindex title = options.hint)&attributes(attributes)
-        != templateToHtml(contentTemplate, options)        
+    label.button(for=labelFor role='button' tabindex=tabindex title=options.hint)&attributes(attributes)
+        != templateToHtml(contentTemplate, options)
 else if varIsStr(options.url)
-    a.button(href=options.url role='link' tabindex=tabindex title = options.hint)&attributes(attributes)
+    a.button(href=options.url role='link' tabindex=tabindex title=options.hint)&attributes(attributes)
         != templateToHtml(contentTemplate, options)
 else
     button.button(disabled=options.disabled title=options.hint)&attributes(attributes)
