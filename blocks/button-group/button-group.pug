@@ -1,11 +1,13 @@
-//-
-    items
-    size
-    disabled
-    plain
-    toggle
-    name
-    value
+//- @pugdoc
+    name: button-group
+    options:
+        - {array} items
+        - {string} size
+        - {bool} disabled
+        - {bool} plain
+        - {string} toggle
+        - {string} name
+        - {string} value
 
 - fastredRequire('arr', 'var')
 
@@ -35,4 +37,4 @@ if varIsEmpty(name) && options.toggle == 'radio'
             - title = item
             - value = item
 
-        != templateToHtml('button', {title: title, icon: item.icon, size: options.size, plain: options.plain, toggle: options.toggle, value: value, cut: cut, name: name, checked: value == options.value, disabled: options.disabled}, 'button-group__item')
+        != templateToHtml('button', {title: title, icon: item.icon, url: item.url, size: options.size, plain: options.plain, toggle: options.toggle, value: value, cut: cut, name: name, checked: value == options.value, disabled: options.disabled}, 'button-group__item')
