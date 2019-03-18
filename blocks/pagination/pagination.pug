@@ -1,18 +1,31 @@
-- fastredRequire('arr', 'var', 'pgn', 'url', 'obj')
+//- @pugdoc
+    name: pagination
+    options:
+        - {object} pagination
+        - {bool} showCount
+
+- fastredRequire('arr', 'locale', 'obj', 'pgn', 'url', 'var')
 
 - showCount = varExists(options.showCount) ? options.showCount : true
 - map = pgnGetMaxCountMap(options.pagination)
 
 .pagination&attributes(attributes)
+
     if arrGetCount(map) > 0
-        .pagination__nav
-            .button-group
-                each value, key in map
-                    a.button.button_inverted.button-group__item(href=urlFromCtrl('page', objGetMerged(options.pagination.params, {pgnPage: key}), options.pagination.anchor) class=key == options.pagination.page ? 'is-active' : null)
-                        if value
-                            = key + 1
-                        else
-                            | ...
+        
+        - items = arr()
+        each value, key in map
+            - item = obj()
+            - arrPush(items, item)
+            - item.url = pageParamsToUrl(objGetMerged(options.pagination.params, {page: key}), options.pagination.anchor)
+            - item.value = varIsEmpty(key) ? null : key
+            if value
+                - item.title = key + 1
+            else
+                - item.title = '...'
+
+        != templateToHtml('button-group', {items: items, value: options.pagination.page}, 'pagination__nav')                
+
     if showCount && options.pagination.count
         - shownCount = pgnGetShownCount(options.pagination)
         span.pagination__count
