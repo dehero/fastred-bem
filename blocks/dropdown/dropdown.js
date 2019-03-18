@@ -10,25 +10,31 @@ function Dropdown() {
         pressed: 'dropdown_pressed'
     };
     var selectors = {
+        button: '.dropdown__button',
         hover: '.dropdown_hover'
     }
 
     require('dropdown/dropdown.css.styl');
 
     $(window).click(function () {
-        $(that.selector).each(function() {
-            that.hide(this);
-        });
+        that.hideAll();
     });
 
     this.init = function (component) {
         var $component = $(component).not(selectors.hover);
 
-        $component.click(function(e) {
+        $component.on('click', selectors.button, function(e) {
             e.stopPropagation();
             e.preventDefault();
 
             that.toggle(component);
+        });
+
+        $component.on('focusin', selectors.button, function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            that.show(component);
         });
     }
 
@@ -38,10 +44,27 @@ function Dropdown() {
         $component.removeClass(classes.pressed);
     }
 
+    this.hideAll = function() {
+        $(that.selector).each(function() {
+            that.hide(this);
+        });
+    }
+
     this.toggle = function(component) {
         var $component = $(component).not(selectors.hover);
 
-        $component.toggleClass(classes.pressed);
+        if ($component.hasClass(classes.pressed)) {
+            that.hide();
+        } else {            
+            that.show();
+        }
+    }
+
+    this.show = function(component) {
+        var $component = $(component).not(selectors.hover);
+
+        that.hideAll();
+        $component.addClass(classes.pressed);
     }
 
     Component.register(this);
