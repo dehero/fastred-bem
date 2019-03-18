@@ -1,11 +1,12 @@
 @require color
+@require button
 
 $dropdown__bg-color           ?= $color_panel
 $dropdown__bg                 ?= $dropdown__bg-color
 
 $dropdown__border-color       ?= $dropdown__bg-color
-$dropdown__border-radius      ?= .25rem
-$dropdown__border-size        ?= 0
+$dropdown__border-radius      ?= $button__border-radius
+$dropdown__border-size        ?= $input__border-size
 
 $dropdown__padding_v          ?= .5rem
 $dropdown__padding_h          ?= 0
