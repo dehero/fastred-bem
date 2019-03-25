@@ -8,10 +8,12 @@
         - {integer} printMargin
         - {bool} wordWrap
         - {bool} gutter
+        - {bool} spring
 
-- fastredRequire('arr', 'frontend-var', 'template')
+- fastredRequire('arr', 'css', 'frontend-var', 'template')
 
 - syntax = arrGetFound(frontendVar('code-editor__syntax'), options.syntax, 'text')
+- attributes.class = cssBemClassArr(attributes.class, {'code-editor_spring': options.spring})
 
 .code-editor(data-syntax=syntax data-print-margin=options.printMargin data-word-wrap=options.wordWrap data-gutter=options.gutter tabindex=0)&attributes(attributes)
     if options.toolbar
