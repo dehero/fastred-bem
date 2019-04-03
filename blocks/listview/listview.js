@@ -173,6 +173,10 @@ function ListView() {
         $content.on(ItemComponent.events.selectedChange, ItemComponent.selector, function(e) {
             $component.trigger(that.events.selectionChange);
         });
+
+        $header.on(ItemComponent.events.sort, ItemComponent.selector, function(e, data) {
+
+        });
     };
 
     this.modeLocked = function(component) {
@@ -256,6 +260,17 @@ function ListView() {
 
             return result;
         }
+    };
+
+    this.sort = function(component, column) {
+        var $component = $(component);
+        var ItemComponent = $component.data('ItemComponent');
+        var $content = $component.data('$content');
+
+        $content.find(ItemComponent.selector).sort(function(item1, item2) {
+            // return a.dataset.sid > b.dataset.sid;
+            console.log(item1, item2); 
+       }).appendTo($content);
     };
 
     this.type = function(component, value) {
