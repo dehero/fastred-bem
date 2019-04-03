@@ -1,12 +1,21 @@
 @require item
 
 .item
-  item()
+  item() 
 
   &_header
     display block
     background $item__bg_header
     color $item__text-color_header
+
+    .item__cell.button
+      border-top none    
+
+    &:hover
+      background $item__bg_header
+    
+    &:active
+      background $item__bg_header
 
 for key, value in $item__type_table
 
@@ -24,30 +33,29 @@ for key, value in $item__type_list
 for key, value in $item__type_grid
 
   .item_type_{value}
+    item_type_grid()
 
     &.item_header
       display none      
 
-.item__field
+.item__cell
   item__cell()
 
   &_spring
     item__cell_spring()
 
-.item__button
+.item_selected
 
-  text-align right
+  .item__button
+    
+    &:active
+      background $item__bg_selected-pressed
 
-  &_depth
+    .item__button
+      text-align right
+      padding-right 0
 
-    &_1
-      width 1rem
+      for depth in (1..9)
 
-    &_2
-      width 3rem
-
-    &_3
-      width 5rem
-
-    &_4
-      width 7rem
+        &_depth_{depth}
+          width 1 + 2 * (depth - 1) rem
