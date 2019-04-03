@@ -12,7 +12,7 @@
   background $button__bg
   background-clip padding-box
   margin 0
-  padding $button__padding_v $button__padding_h
+  padding $button__padding_v $button__padding_h 
   if $button__border-size > 0
     border $button__border-size solid $button__border-color
   else
@@ -120,10 +120,18 @@
   //align-items center
 
   & + .button__title
+  & + .button__caret
     margin-left .5em
 
-//.button__title
-  //vertical-align middle
+.button__title
+
+  & + .button__caret
+    margin-left .5em
+
+.button__caret
+  height auto
+  vertical-align middle
+  line-height normal
 
 .button__input
   display none
