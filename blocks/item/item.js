@@ -9,7 +9,7 @@ function loadTypes() {
         if (varIsArr(arr)) {
             for (var i = 0; i < arr.length; i++) {
                 result[arr[i]] = 'item_type_' + arr[i];
-            }
+            } 
         }
     }
 
@@ -22,12 +22,14 @@ function Item() {
     this.classSelected = 'item_selected';
 
     this.classes = {
+        header: 'item_header',
         types: loadTypes()
     };
 
     this.events = {
         beforeSelectedChange:   'beforeSelectedChange',
-        selectedChange:         'selectedChange'
+        selectedChange:         'selectedChange',
+        sort:                   'sort'
     };
 
     var that = this;
