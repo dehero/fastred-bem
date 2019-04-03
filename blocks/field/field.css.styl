@@ -29,6 +29,15 @@
     .field__label
       font-size $input__font-size_xl
 
+.field_required
+
+  .field__label
+
+    if $field__required-label-mark != ''
+      &:after
+        content (' ' + $field__required-label-mark)
+        color $color_marked
+
 .field__control
   flex-grow 1
   display flex
