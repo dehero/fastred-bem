@@ -1,15 +1,22 @@
 //- @pugdoc
     name: button__content
-    options:
+    options: 
         - {string} icon
-        - {string} title
+        - {string} title 
+        - {string} caret
+        - {string} iconClass
+        - {string} titleClass
+        - {string} caretClass
 
 - fastredRequire('template')
 
 if varIsNotEmpty(options.icon)
-    span.button__icon
-        != templateToHtml('font-icon', {id: options.icon})
-    if varIsNotEmpty(options.title)
-        != ' '
+    span.button__icon(class=options.iconClass)
+        if varIsStr(options.icon)
+            != templateToHtml('font-icon', {id: options.icon})
 if varIsNotEmpty(options.title)
-    span.button__title= options.title
+    span.button__title(class=options.titleClass)= options.title
+if varIsNotEmpty(options.caret)
+    span.button__caret(class=options.caretClass)
+        if varIsStr(options.caret)
+            != templateToHtml('font-icon', {id: options.caret})
