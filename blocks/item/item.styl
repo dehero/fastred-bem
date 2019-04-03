@@ -1,4 +1,5 @@
 @require color
+@require button
 
 $json = json('./item.json', {hash: true})
 
@@ -21,6 +22,8 @@ $item__border-color_selected ?= transparent
 $item__text-color_selected   ?= white
 
 $item__bg_header             ?= $color_panel
+$item__border-size_header    ?= 1px
+$item__border-color_header   ?= $button__border-color
 $item__text-color_header     ?= $color_text
 
 item__padding()
@@ -54,16 +57,17 @@ item()
   &:active
     background $item__bg_pressed
 
-  &_selected
+  &_selected 
     item_selected()
 
   &:last-child
     margin-bottom 0
 
 item__cell()
-  display block  
+  // display block
   flex-shrink 0
   overflow hidden
+  box-sizing content-box
   item__padding()
 
 item__cell_spring()
@@ -81,3 +85,6 @@ item_type_table()
   display flex
   flex-flow row nowrap
   align-items center
+
+item_type_grid()
+  item__padding() 
