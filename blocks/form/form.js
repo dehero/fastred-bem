@@ -10,9 +10,10 @@ function Form() {
 	var that = this;
 	var $ = require('jquery');
 
-	this.data = function (component, value) {
+	this.data = function(component, value) {
 
 		if (typeof value !== 'undefined') {
+			$(component)[0].reset();
 			$.each(value, function (key, value) {
 				var ctrl = $('[name=' + key + ']', component);
 				switch (ctrl.prop("type")) {
