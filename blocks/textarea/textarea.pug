@@ -7,7 +7,7 @@
         - {bool} spring
         - {string} placeholder
 
-- fastredRequire('css', 'var')
+- fastredRequire('css', 'frontend-var', 'var')
 
 - autosize = varExists(options.autosize) ? options.autosize : true
 - attributes.class = cssBemClassArr(attributes.class, {'textarea_autosize': autosize, 'textarea_spring': options.spring})
