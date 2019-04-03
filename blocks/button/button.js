@@ -1,6 +1,6 @@
 var Component = require('component'); 
 
-function Button() {
+function Button() { 
     this.template = 'button';
     this.selector = '.button';
 
@@ -73,5 +73,7 @@ function Button() {
 
     Component.register(this);
 }
+
+Button.prototype = Component;
 
 module.exports = new Button();
