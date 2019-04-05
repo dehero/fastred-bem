@@ -25,10 +25,12 @@ $dropdown__z-index = 99
   cursor auto
 
 .dropdown_bubble.dropdown_pressed
+.dropdown_bubble.dropdown_hover:hover
 
   .dropdown__menu
     margin-left - $dropdown__bubble-offset
-    margin-top $dropdown__bubble-offset
+    margin-top $dropdown__bubble-offset    
+    padding-top $dropdown__bubble-offset
 
   &:after
     content ' '
