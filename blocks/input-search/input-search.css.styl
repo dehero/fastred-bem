@@ -1,0 +1,22 @@
+@require button
+@require input
+@require 'input-search/input-search'
+
+.input-search
+    position relative
+
+.input-search__icon
+    margin-left 0
+    margin-right - ($input-search__button-size + $button__padding_h * 2)
+    width $input-search__button-size
+
+.input-search__reset
+    margin-left - ($input-search__button-size + $button__padding_h * 2)
+    width $input-search__button-size
+
+.input-search__input
+    padding-left $input-search__button-size + $button__padding_h * 2
+    padding-right $input-search__button-size + $button__padding_h * 2
+
+    &:placeholder-shown + .input-search__reset
+        display none 

@@ -1,0 +1,18 @@
+//- @pugdoc
+    name: input-search
+    options:
+        - {string} name
+        - {string} value
+        - {bool} spring
+        - {string} size
+        - {string} cut
+        - {bool} readonly
+        - {number} timeout
+
+- fastredRequire('arr', 'css', 'template', 'var')
+- timeout = varExists(options.timeout) ? options.timeout : 500
+
+.input-search&attributes(attributes)(data-timeout=timeout)
+    != templateToHtml('button', {icon: 'search', plain: true, disabled: true}, 'input-search__icon') 
+    != templateToHtml('input',  {value: options.value, name: options.name, readonly: options.readonly, placeholder: " ", spring: options.spring, cut: options.cut, size: options.size}, 'input-search__input') 
+    != templateToHtml('button', {icon: 'close', plain: true}, 'input-search__reset')  
