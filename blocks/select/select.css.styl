@@ -1,6 +1,9 @@
 @require input
 @require 'select/select'
 
+.select
+  display inline-block
+
 .select_spring
 
   .select__control
@@ -36,30 +39,36 @@
   &:focus
     input__focus()
 
-  &_size
+.select_size
 
-    &_s
-      font-size $select__font-size_s
+  &_s
+    font-size $select__font-size_s
 
-    &_l
-      font-size $select__font-size_l
+  &_l
+    font-size $select__font-size_l
 
-    &_xl
-      font-size $select__font-size_xl
+  &_xl
+    font-size $select__font-size_xl
 
-  &_cut
+.select_cut
 
-    &_right
+  &_right
+
+    .select__control
       border-top-right-radius  0
       border-bottom-right-radius 0
 
-    &_both
+  &_both
+
+    .select__control
       border-radius 0
 
-    &_left
+  &_left
+
+    .select__control    
       border-top-left-radius 0
       border-bottom-left-radius 0
-
+      
 .select__caret
   padding $select__padding_v $select__padding_h
   margin $select__border-size
@@ -79,7 +88,7 @@
 
 .select__item
   padding 0//$select__padding_v $select__padding_h
-  //padding-right $select__caret-size_h + $select__padding_h * 2
+  //padding-right $select__caret-size_h + $select__padding_h * 2 
   min-height 0
 
   &:selected
