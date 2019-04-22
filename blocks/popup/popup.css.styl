@@ -2,42 +2,100 @@
 @require root
 @require screen
 
-@require 'popup/popup'
+@require 'popup/popup' 
 
-.popup__window
-  background $popup__window-bg
-  display flex
-  flex-flow column nowrap
-  position relative
-  width 100%
-  margin 0
+.popup
+  background $popup__bg
+  display none
+  position fixed  
+  left 0
+  right 0
+  top 0
+  bottom 0
+  z-index $popup__z-index
+  justify-content center
+  align-items start
 
   +screen__wider_mobile()
-    min-width $popup__window-min-width
+    padding $popup__offset_v $popup__offset_h
+    overflow hidden auto
+
+.popup__window
+  display flex
+  flex-flow column nowrap
+  position fixed  
+  left 0
+  right 0
+  top 0
+  bottom 0
+  max-width 100%
+
+  +screen__wider_mobile()
+    position relative    
     width auto
-    border-radius $popup__border-radius
-
-  //+screen__wider_tablet()
-  //  max-width $screen__max-width_tablet
-
-  +screen__wider_desktop()
-    max-width $screen__max-width_desktop
 
 .popup__header
+  background $popup__header-bg
   padding $popup__padding_v $popup__padding_h
+  padding-bottom 0
+  display flex
+  flex-flow row nowrap
+  border-radius 0
+  flex-shrink 0
 
-.popup__title
+  +screen__wider_mobile()
+    border-radius $popup__border-radius
+    border-bottom-left-radius 0
+    border-bottom-right-radius 0
+
+.popup__title  
   line-height 1
   font-size $popup__title-font-size
+  padding-bottom $popup__padding_v
+  flex-grow 1
+  
+  &:empty  
+    padding-bottom 0    
 
 .popup__close
-  float right
+  flex-shrink 0
+  padding-bottom $popup__padding_v
 
-  $radius = $screen__scrollbar-max-width + $root__font-size * 3
-  $color = alpha(invert($popup__bg), 1)
-  $bg = mix($popup__bg, transparent)
+.popup__footer
+  background $popup__footer-bg
+  padding $popup__padding_v $popup__padding_h
+  padding-top 0
+  border-radius 0
+  flex-shrink 0
 
-  &_free
+  +screen__wider_mobile()
+    border-radius $popup__border-radius
+    border-top-left-radius 0
+    border-top-right-radius 0    
+
+.popup__footer
+  display flex
+  flex-flow row nowrap
+
+.popup__status
+  padding-top $popup__padding_v
+  flex-grow 1
+  
+  &:empty
+    padding-top 0
+
+.popup__buttons
+  padding-top $popup__padding_v
+  flex-shrink 0  
+
+.popup__title:empty + .popup__close
+.popup_plain .popup__close
+
+  +screen__wider_mobile()
+    $radius = $screen__scrollbar-max-width + $root__font-size * 3
+    $color = alpha(invert($popup__bg), 1)
+    $bg = mix($popup__bg, transparent)
+
     display inline-flex
     float none
     position fixed
@@ -47,7 +105,7 @@
     background $bg
     border none
     border-bottom-left-radius $radius
-    z-index 1000
+    z-index $popup__z-index_modal + 1
     padding $screen__scrollbar-max-width
     padding-left 2em
     padding-bottom 2em
@@ -61,55 +119,95 @@
       input__focus(false, $bg)
 
 .popup__content
+  background $popup__content-bg
   position relative
   display block
   padding 0 $popup__padding_h
+  box-sizing content-box
+  overflow hidden auto
+  flex-grow 1
+  width auto
 
-.popup__footer
-  padding $popup__padding_v $popup__padding_h
+  +screen__wider_mobile()
+    overflow hidden    
+    min-height 1rem
+    min-width 1rem
+    max-width $popup__content-max-width
+    flex-grow 0
 
-.popup
-  background $popup__bg
-  display none
-  position fixed
-  overflow auto
-  left 0
-  right 0
-  top 0
-  bottom 0
-  z-index 999
-  padding $popup__offset_v $popup__offset_v
-  justify-content center
-  align-items top
+.popup_modal
+  z-index $popup__z-index_modal
 
-  &_modal
-    z-index 9999
+.popup_align
 
-  &_align
-
-    &_middle
-      //align-items center
-
-      .popup__window
-        margin auto
-
-    &_client
-      align-items stretch
-
-      .popup__content
-        overflow auto
-        flex-grow 1
-        position relative
-
-  &_spring
+  &_middle
 
     .popup__window
-      width 100%
+      margin auto
 
-  &_plain
-
-    .popup__window
-      background transparent
+  &_client
+    align-items stretch
 
     .popup__content
+      overflow auto
+      flex-grow 1
+      position relative
+
+.popup_plain
+
+  +screen__wider_mobile()
+    color $popup__text-color_plain
+
+    .popup__header
+    .popup__content
+    .popup__footer  
       padding 0
+      background transparent
+
+.popup_width
+
+  &_s
+
+    .popup__content
+      max-width $popup__content-max-width_s
+
+  &_l
+
+    .popup__content
+      max-width $popup__content-max-width_l
+
+  &_xl
+
+    .popup__content
+      max-width $popup__content-max-width_xl
+
+.popup_spring
+  justify-content stretch
+
+  .popup__content
+    max-width none
+
+.popup_embed
+
+  +screen__wider_mobile()
+    display block
+    position inherit
+    background none
+    padding 0
+    z-index inherit
+
+    .popup__window
+      position inherit        
+
+    .popup__content
+      background none
+      padding 0
+      border-radius 0
+      min-width auto
+      max-width none
+
+    .popup__header
+      display none
+
+    .popup__footer
+      display none

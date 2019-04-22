@@ -18,5 +18,5 @@ if varIsNotEmpty(options.title)
     span.button__title(class=options.titleClass)= options.title
 if varIsNotEmpty(options.caret)
     span.button__caret(class=options.caretClass)
-        if varIsStr(options.caret)
+        if varIsStr(options.caret)            
             != templateToHtml('font-icon', {id: options.caret})

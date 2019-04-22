@@ -1,16 +1,20 @@
 //- @pugdoc
     name: select
-    options:
+    options: 
         - {array} items
         - {array} groups
         - {string} size
         - {bool} spring
         - {string} cut
-        - value
+        - {any} value
+        - {bool} disabled        
+        - {bool} allowEmpty
+        - {string} placeholder 
 
 - fastredRequire('css', 'template', 'var')
 
-- attributes.class = cssBemClassArr(attributes.class, {'select_spring': options.spring, 'select_size_': size, 'select_cut_': options.cut})
+- empty = options.value == ''
+- attributes.class = cssBemClassArr(attributes.class, {'select_spring': options.spring, 'select_size_': size, 'select_cut_': options.cut, 'select_empty': empty && options.allowEmpty})
 
 mixin items(items, selectedValue)
     if varIsNumericArr(items)
@@ -21,7 +25,9 @@ mixin items(items, selectedValue)
             != templateToHtml('select__item', {data: {title: item, value: value}, selectedValue: selectedValue})
 
 .select&attributes(attributes)
-    select.select__control(name=options.name)
+    select.select__control(disabled=options.disabled name=options.name)
+        if options.allowEmpty
+            option(value selected=empty).select__item.select__item_placeholder= options.placeholder
         if options.items
             +items(options.items, options.value)
         if options.groups

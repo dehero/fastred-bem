@@ -1,30 +1,31 @@
 //@require button
 @require color
 
-$input__bg                ?= $color_input
+$input__bg                      ?= $color_input
+ 
+$input__border-color            ?= $color_input
+$input__border-radius           ?= .25rem
+$input__border-size             ?= 0
 
-$input__border-color      ?= $color_input
-$input__border-radius     ?= .25rem
-$input__border-size       ?= 0
+$input__font-size               ?= 1rem
+$input__font-size_s             ?= .85em
+$input__font-size_l             ?= 1.25em
+$input__font-size_xl            ?= 1.5em
 
-$input__font-size         ?= 1rem
-$input__font-size_s       ?= .85em
-$input__font-size_l       ?= 1.25em
-$input__font-size_xl      ?= 1.5em
+$input__text-color              ?= black
+$input__text-color_placeholder  ?= alpha($input__text-color, 50%)
 
-$input__text-color        ?= black
+$input__padding_h               ?= .5em
+$input__padding_v               ?= .25em
 
-$input__padding_h         ?= .5em
-$input__padding_v         ?= .25em
+$input__focus-color             ?= $color_focus
+$input__focus-size              ?= 2px
 
-$input__focus-color       ?= $color_focus
-$input__focus-size        ?= 2px
+$input__size_h                  ?= 10em
 
-$input__size_h            ?= 10em
-
-input__focus(outer = false, color = $input__focus-color)
+input__focus(outer = false, color = $input__focus-color, borderColor = color)
   size = $input__focus-size - $input__border-size
-  border-color color
+  border-color borderColor
   if outer
     box-shadow 0 0 0 size color
   else

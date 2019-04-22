@@ -1,8 +1,8 @@
 //- @pugdoc
     name: select
     options:
-        - {array} data
-        - selectedValue
+        - {any} data
+        - {any} selectedValue
 
 - fastredRequire('var')
 
@@ -13,4 +13,4 @@ else
     - title = options.data
     - value = options.data
 
-option.select__item(value=value selected=(options.selectedValue==value))= title
+option.select__item(value=value selected=(options.selectedValue!='' && options.selectedValue==value))= title

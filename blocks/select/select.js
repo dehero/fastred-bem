@@ -15,6 +15,9 @@ function Select() {
     var dataKeys = {
         $control: '$control'
     }
+    var classes = {
+        empty: 'select_empty' 
+    }
 
     require('font-icon');
     require('select/select.css.styl');
@@ -24,6 +27,24 @@ function Select() {
     this.add = function(component, items) {
         that.insert(component, items, that.count(component));
     }
+    
+    this.clear = function(component) {
+        var $control = $(component).data(dataKeys.$control);
+
+        $control.empty();
+    }
+
+    this.count = function(component) {
+        var $control = $(component).data(dataKeys.$control);
+
+        return $control.children().length;
+    }
+
+    this.disabled = function(component, value) {
+        var $control = $(component).data(dataKeys.$control);
+
+        return Input.disabled($control, value);
+    }
 
     this.init = function(component) {
         var $component = $(component);
@@ -32,6 +53,7 @@ function Select() {
         $component.data(dataKeys.$control, $control);
 
         $control.change(function(e) {
+            $component.toggleClass(classes.empty, Input.value($control) == '');
             $component.trigger(that.events.change);
         });
     }
@@ -56,16 +78,10 @@ function Select() {
         }
     }
 
-    this.clear = function(component) {
+    this.value = function(component, value) {
         var $control = $(component).data(dataKeys.$control);
 
-        $control.empty();
-    }
-
-    this.count = function(component) {
-        var $control = $(component).data(dataKeys.$control);
-
-        return $control.children().length;
+        return Input.value($control, value);
     }
 
     Input.register(this);

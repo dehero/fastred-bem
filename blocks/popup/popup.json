@@ -1,0 +1,6 @@
+{
+    "popup__content-max-width": "40rem",
+    "popup__content-max-width_s": "25rem",
+    "popup__content-max-width_l": "60rem",
+    "popup__content-max-width_xl": "80rem" 
+}

@@ -1,11 +1,26 @@
 @require color
 @require screen
 
-$popup__bg                ?= alpha(black, 50%)
-$popup__offset_v          ?= 2rem
-$popup__border-radius     ?= .25rem
-$popup__padding_h         ?= 1.5rem
-$popup__padding_v         ?= 1.5rem
-$popup__title-font-size   ?= 1.5rem
-$popup__window-bg         ?= $color_input
-$popup__window-min-width  ?= $screen__max-width_mobile
+$json = json('./popup.json', {hash: true}) 
+
+$popup__bg                    ?= alpha(black, 50%)
+$popup__offset_h              ?= 2rem
+$popup__offset_v              ?= 2rem
+$popup__border-radius         ?= .25rem 
+$popup__padding_h             ?= 1.5rem
+$popup__padding_v             ?= 1.5rem
+$popup__title-font-size       ?= 1.5rem
+
+$popup__header-bg             ?= $color_input
+$popup__content-bg            ?= $color_input
+$popup__footer-bg             ?= $color_input
+
+$popup__text-color_plain      ?= white
+
+$popup__z-index               ?= 999
+$popup__z-index_modal         ?= 9999
+
+$popup__content-max-width     ?= $json.popup__content-max-width
+$popup__content-max-width_s   ?= $json.popup__content-max-width_s
+$popup__content-max-width_l   ?= $json.popup__content-max-width_l
+$popup__content-max-width_xl  ?= $json.popup__content-max-width_xl

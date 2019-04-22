@@ -1,7 +1,7 @@
 @require input
 @require helper
 
-@require 'button/button'
+@require 'button/button' 
 
 .button
   display inline-flex
@@ -40,18 +40,13 @@
     z-index 1
 
   &:active
+  &_pressed
     button__pressed()
-
-  //&:hover
-  //  background $button__bg_hover
 
   &_disabled, &:disabled
     opacity .6
     pointer-events none
     cursor default
-
-  &_pressed
-    button__pressed()
 
   &_main
     background $button__bg_main
@@ -60,10 +55,8 @@
       border-color $button__border-color_main
 
     &:active
-      background $button__bg_main-pressed
-      color $button__text-color_main-pressed
-      if $button__border-size > 0
-        border-color $button__border-color_main-pressed
+    &.button_pressed
+      button__pressed(true)
 
   &_plain
     background none
@@ -73,17 +66,15 @@
     box-sizing content-box
 
     &:active
-      border none
-      background none
-      color $button__text-color_plain-pressed
+    &.button_pressed
+      button__pressed(false, true)
 
     &.button_main
       color $button__text-color_plain-main
 
       &:active
-        border none
-        background none
-        color $button__text-color_plain-main
+      &.button_pressed
+        button__pressed(true, true)
 
   &_size
 
@@ -136,5 +127,16 @@
 .button__input
   display none
 
-  &:checked + .button
-    button__pressed()
+  &:checked 
+    
+    & + .button
+      button__pressed()
+
+      &.button_main
+        button__pressed(true)      
+
+    & + .button_plain
+      button__pressed(false, true)
+
+      &.button_main
+        button__pressed(true, true)

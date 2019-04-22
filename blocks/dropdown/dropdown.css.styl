@@ -67,12 +67,10 @@ $dropdown__z-index = 99
 
 .dropdown_pressed
 
-  .dropdown__menu
+  & > .dropdown__menu
     display block
 
-.dropdown_hover
+.dropdown_hover:hover
 
-  &:hover
-
-    .dropdown__menu
-      display block
+  & > .dropdown__menu
+    display block

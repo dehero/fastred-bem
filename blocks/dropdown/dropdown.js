@@ -11,7 +11,8 @@ function Dropdown() {
     };
     var selectors = {
         button: '.dropdown__button',
-        hover: '.dropdown_hover'
+        hover: '.dropdown_hover',
+        menu: '.dropdown__menu'
     }
 
     require('dropdown/dropdown.css.styl');
@@ -21,26 +22,27 @@ function Dropdown() {
     });
 
     this.init = function (component) {
-        var $component = $(component).not(selectors.hover);
+        var $component = $(component);
+
+        $component.on('click', selectors.menu, function(e) {
+            e.stopPropagation();
+        });
 
         $component.on('click', selectors.button, function(e) {
             e.stopPropagation();
             e.preventDefault();
-
-            that.toggle(component);
         });
 
         $component.on('focusin', selectors.button, function(e) {
             e.stopPropagation();
             e.preventDefault();
 
-            that.show(component);
+            that.toggle(component);
         });
     }
 
     this.hide = function(component) {
-        var $component = $(component).not(selectors.hover);
-
+        var $component = $(component);
         $component.removeClass(classes.pressed);
     }
 
@@ -51,17 +53,17 @@ function Dropdown() {
     }
 
     this.toggle = function(component) {
-        var $component = $(component).not(selectors.hover);
+        var $component = $(component);             
 
         if ($component.hasClass(classes.pressed)) {
-            that.hide();
+            that.hide(component);
         } else {            
-            that.show();
+            that.show(component);
         }
     }
 
     this.show = function(component) {
-        var $component = $(component).not(selectors.hover);
+        var $component = $(component);
 
         that.hideAll();
         $component.addClass(classes.pressed);

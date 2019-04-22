@@ -39,6 +39,17 @@
   &:focus
     input__focus()
 
+  &:disabled
+    opacity .6
+    pointer-events none
+    cursor default    
+
+    & + .select__caret
+      opacity .6
+
+  &:required:invalid
+    color $select__text-color_placeholder
+
 .select_size
 
   &_s
@@ -64,17 +75,22 @@
       border-radius 0
 
   &_left
-
+ 
     .select__control    
       border-top-left-radius 0
       border-bottom-left-radius 0
+
+.select_empty
+
+  .select__control
+    color $select__text-color_placeholder
       
 .select__caret
   padding $select__padding_v $select__padding_h
   margin $select__border-size
   margin-left (- $select__caret-size_h) - $select__padding_h * 2
   width $select__caret-size_h + $select__padding_h * 2
-  //background $select__caret-bg
+  //background $select__caret-bg 
   color $select__text-color
   border-radius $select__border-radius
   border-top-left-radius 0
@@ -87,9 +103,12 @@
   vertical-align top
 
 .select__item
-  padding 0//$select__padding_v $select__padding_h
-  //padding-right $select__caret-size_h + $select__padding_h * 2 
+  padding 0
   min-height 0
+  color $select__text-color
+
+  &_placeholder
+    color $select__text-color_placeholder
 
   &:selected
     background $select__bg-color_selected

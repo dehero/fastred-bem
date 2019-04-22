@@ -35,7 +35,7 @@
     &_l
       font-size $input__font-size_l
 
-    &_xl
+    &_xl 
       font-size $input__font-size_xl
 
   &_cut
@@ -50,3 +50,11 @@
     &_left
       border-top-left-radius 0
       border-bottom-left-radius 0
+
+  &:disabled
+    opacity .6
+    pointer-events none
+    cursor default
+
+  &::placeholder
+    color $input__text-color_hint

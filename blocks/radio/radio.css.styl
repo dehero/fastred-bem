@@ -11,7 +11,7 @@ $top-offset = (($radio__font-size * $radio__line-height - $radio__size) / 2)
   outline none
 
   &:focus .radio__label:before
-    input__focus(true)
+    input__focus(true, $input__focus-color, $radio__bg-color)
 
 .radio__label
   position relative
@@ -38,7 +38,7 @@ $top-offset = (($radio__font-size * $radio__line-height - $radio__size) / 2)
 
   &:checked + .radio__label:before
     background $radio__tick-color
-    border-width $radio__size * .2
+    border-width $radio__size * .25
 
 .radio__title
   display inline-block
