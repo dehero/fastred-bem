@@ -1,5 +1,7 @@
 {
+    "cancel": "Cancel",
     "found-1": "Found %1",
     "found-1-shown-2": "Found %1, shown %2",
-    "header": "Header"
+    "header": "Header",
+    "ok": "OK"
 }
