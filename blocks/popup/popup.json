@@ -1,4 +1,6 @@
 {
+    "popup__duration_hiding": "400ms",
+    "popup__duration_showing": "400ms",
     "popup__content-max-width": "40rem",
     "popup__content-max-width_s": "25rem",
     "popup__content-max-width_l": "60rem",

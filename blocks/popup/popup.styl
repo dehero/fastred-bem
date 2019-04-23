@@ -18,9 +18,24 @@ $popup__footer-bg             ?= $color_input
 $popup__text-color_plain      ?= white
 
 $popup__z-index               ?= 999
-$popup__z-index_modal         ?= 9999
+$popup__z-index_top           ?= 9999
 
 $popup__content-max-width     ?= $json.popup__content-max-width
 $popup__content-max-width_s   ?= $json.popup__content-max-width_s
 $popup__content-max-width_l   ?= $json.popup__content-max-width_l
 $popup__content-max-width_xl  ?= $json.popup__content-max-width_xl
+
+$popup__duration_hiding       ?= $json.popup__duration_hiding
+$popup__duration_showing      ?= $json.popup__duration_showing
+
+popup__animation_hiding()
+  0%
+    opacity 1
+  100%
+    opacity 0    
+
+popup__animation_showing()
+  0%
+    opacity 0
+  100%
+    opacity 1  

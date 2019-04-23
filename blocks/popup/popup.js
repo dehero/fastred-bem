@@ -16,18 +16,21 @@ function Popup() {
         popup: 'popup'
     }
 
-    var selectors = {
+    var selectors = {        
         content:    '.popup__content',
         hide:       '.popup__hide',
         status:     '.popup__status',
         submit:     '.popup__submit',
         title:      '.popup__title',
-        toggle:     '.popup__show'
+        toggle:     '.popup__show',
+        top:        '.popup_top'
     };
 
     var classes = {
-        visible: 'popup_visible',
-        hiding: 'popup_hiding' 
+        top:        'popup_top',
+        visible:    'popup_visible',
+        hiding:     'popup_hiding',
+        showing:    'popup_showing'
     };
 
     require('button');
@@ -43,16 +46,25 @@ function Popup() {
     });      
 
     this.hide = function(component) {
-        $(component).fadeOut('fast', function() {
-            popupCount--;
-            Body.scrollBarVisible(popupCount === 0);
-        });
+        var $component = $(component);
+
+        $component.addClass([classes.visible, classes.hiding].join(' '));
     };
 
     this.show = function(component) {
-        popupCount++;
-        Body.scrollBarVisible(false);
-        $(component).css('display', 'flex').hide().fadeIn('fast');
+        var $component = $(component);
+
+        if (!$component.hasClass(classes.visible)) {
+            popupCount++;
+            Body.scrollBarVisible(false);
+            $component.addClass([classes.visible, classes.showing].join(' '));
+        }        
+
+        // Make last shown popup topmost
+        if (popupCount > 1) {
+            $(selectors.top).removeClass(classes.top);
+            $component.addClass(classes.top);
+        }
     };
 
     this.init = function(component) {
@@ -63,6 +75,20 @@ function Popup() {
         $component.click(function(e) {
             if (e.target !== this) return;
             Popup.hide(component);
+        });
+
+        $component.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () {
+            if ($component.hasClass(classes.hiding)) {
+                $component.removeClass([classes.hiding, classes.visible].join(' '));                
+                popupCount--;
+                Body.scrollBarVisible(popupCount === 0);
+                // Remove topmost class if there's one or less popups visible
+                if (popupCount < 2) {
+                    $(selectors.top).removeClass(classes.top);
+                }
+            } else {       
+                $component.removeClass(classes.showing);
+            }
         });
 
         $buttonSubmit.click(function(e) {

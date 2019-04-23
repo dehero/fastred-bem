@@ -2,7 +2,13 @@
 @require root
 @require screen
 
-@require 'popup/popup' 
+@require 'popup/popup'
+
+@keyframes popup_showing
+  popup__animation_showing()
+
+@keyframes popup_hiding
+  popup__animation_hiding()
 
 .popup
   background $popup__bg
@@ -14,11 +20,20 @@
   bottom 0
   z-index $popup__z-index
   justify-content center
-  align-items start
+  align-items start  
 
   +screen__wider_mobile()
     padding $popup__offset_v $popup__offset_h
     overflow hidden auto
+
+  &_visible
+    display flex
+
+  &_showing
+    animation popup_showing $popup__duration_showing ease 0ms 1 normal running
+
+  &_hiding
+    animation popup_hiding $popup__duration_hiding ease 0ms 1 normal running
 
 .popup__window
   display flex
@@ -105,7 +120,7 @@
     background $bg
     border none
     border-bottom-left-radius $radius
-    z-index $popup__z-index_modal + 1
+    z-index $popup__z-index
     padding $screen__scrollbar-max-width
     padding-left 2em
     padding-bottom 2em
@@ -135,8 +150,8 @@
     max-width $popup__content-max-width
     flex-grow 0
 
-.popup_modal
-  z-index $popup__z-index_modal
+.popup_top
+  z-index $popup__z-index_top
 
 .popup_align
 
@@ -211,3 +226,8 @@
 
     .popup__footer
       display none
+
+.popup__show_embed
+
+  +screen__wider_mobile()
+    display none
