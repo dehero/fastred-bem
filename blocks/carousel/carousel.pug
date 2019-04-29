@@ -1,0 +1,33 @@
+//- @pugdoc
+    name: carousel
+    options:
+        - {array} items
+        - {string} itemTemplate
+        - {number} interval 
+
+- fastredRequire('arr', 'css', 'frontend-var', 'obj', 'template', 'var')
+
+- attributes['data-interval'] = varIsNotEmpty(options.interval) ? options.interval : 5000
+- itemTemplate = varIsNotEmpty(options.itemTemplate) ? options.itemTemplate : 'steady-image'
+
+.carousel&attributes(attributes)
+
+    .carousel__items
+        - index = 0
+        each item in options.items
+            - itemClass = cssBemClassArr('carousel__item', {'carousel__item_selected': index === 0})
+            - itemOptions = objGetMerged(options, item)
+            != templateToHtml(itemTemplate, itemOptions, {class: itemClass})
+            - index++
+
+    if arrGetCount(options.items) > 1
+
+        .carousel__indicators
+            - index = 0
+            each item in options.items
+                - indicatorClass = cssBemClassArr('carousel__indicator', {'carousel__indicator_selected': index === 0})
+                != templateToHtml('button', null, {class: indicatorClass})
+                - index++
+
+        != templateToHtml('button', {icon: 'arrow-left', plain: true}, {class: 'carousel__control carousel__control_previous'})
+        != templateToHtml('button', {icon: 'arrow-right', plain: true}, {class: 'carousel__control carousel__control_next'})   

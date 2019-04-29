@@ -22,7 +22,7 @@
 
 - fastredRequire('arr', 'css', 'template', 'var')
 
-- size = arrGetFound(['s', 'l', 'xl'], options.size)
+- size = arrGetFound(['s', 'l', 'xl'], options.size, null)
 - attributes.class = cssBemClassArr(attributes.class, {'button_plain': options.plain, 'button_main': options.main, 'button_disabled': options.disabled, 'button_size_': options.size, 'button_cut_': options.cut})
 - tabindex = options.disabled ? -1 : 0
 - labelFor = options.labelFor

@@ -1,0 +1,134 @@
+@require color
+@require helper
+@require screen
+
+@require 'carousel/carousel'
+
+@keyframes carousel__item_showing
+  carousel__animation()
+
+@keyframes carousel__item_showing-reverse
+  carousel__animation(false, true)
+
+@keyframes carousel__item_hiding
+  carousel__animation(true)
+
+@keyframes carousel__item_hiding-reverse
+  carousel__animation(true, true)
+
+.carousel
+  display inline-block
+  max-width 100%
+  position relative
+
+  +screen__wider_mobile()
+    padding-bottom 0
+
+.carousel__items
+  position relative
+  overflow hidden
+
+.carousel__item
+  display block
+  position absolute
+  left 0
+  right 0
+  bottom 0
+  top 0
+  z-index 0
+  animation-play-state paused
+    
+  &_selected
+    position relative
+    z-index 1
+
+  &_showing
+    animation carousel__item_showing $carousel__duration
+    z-index 1
+
+  &_hiding
+    animation carousel__item_hiding $carousel__duration
+    z-index 1
+
+.carousel_reverse
+
+  .carousel__item
+
+    &_showing
+      animation carousel__item_showing-reverse $carousel__duration
+
+    &_hiding
+      animation carousel__item_hiding-reverse $carousel__duration
+
+.carousel__indicators
+  display block    
+  text-align center
+  line-height 1
+  margin -.5rem
+  padding-top 1rem
+
+  +screen__wider_mobile()
+    z-index 3
+    position absolute
+    left 0
+    right 0
+    bottom 0
+    padding-bottom 1rem
+
+.carousel__indicator
+  box-sizing content-box
+  width .6rem
+  height .6rem
+  border-radius 1rem
+  display inline-block
+  margin .5rem
+  border .2rem $color_button solid
+  background none
+  padding 0
+
+  &:active
+    background none
+    border-color $color_button
+
+  +screen__wider_mobile()
+    border-color $carousel__control-color
+
+    &:active
+      border-color $carousel__control-color
+
+  &_selected
+    background $color_button
+    width 1rem
+    height 1rem
+    border-width 0    
+
+    +screen__wider_mobile()
+      background $carousel__control-color
+
+.carousel__control
+  display none
+  position absolute
+  top 0
+  bottom 0
+  width 15%
+  padding 1rem
+  margin 0
+  font-size 2rem
+  color $carousel__control-color
+  user-select none
+  z-index 3
+  helper__valign-children()
+
+  &:active
+    color $carousel__control-color
+
+  &_previous
+    left 0
+    text-align left
+
+  &_next
+    right 0
+    text-align right
+
+  +screen__wider_mobile()
+    display block    

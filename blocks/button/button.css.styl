@@ -7,7 +7,7 @@
   display inline-flex
   flex-flow row nowrap
   align-items baseline
-  white-space nowrap
+  white-space nowrap 
   color $button__text-color
   background $button__bg
   background-clip padding-box
@@ -64,6 +64,7 @@
     border none
     margin (- $button__padding_v)  (- $button__padding_h)
     box-sizing content-box
+    border-radius 0
 
     &:active
     &.button_pressed
@@ -115,6 +116,8 @@
     margin-left .5em
 
 .button__title
+  overflow hidden
+  text-overflow ellipsis
 
   & + .button__caret
     margin-left .5em

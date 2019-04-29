@@ -5,7 +5,7 @@ function ListView() {
     this.selector = '.listview';
 
     var that = this;
-    var $ = window.jQuery = require('jquery');
+    var $ = require('jquery');
     var selectors = {
         content:        '.listview__content',
         header:         '.listview__header'
@@ -26,7 +26,7 @@ function ListView() {
         type:           'type'
     };
 
-    require('jquery-taphold');
+    require('jquery-touch-events')($);
     require('item');
     require('listview/listview.css.styl');
     template(this.template, require('listview/listview.pug'));

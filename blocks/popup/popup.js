@@ -37,6 +37,7 @@ function Popup() {
     require('toolbar');
     require('popup/popup.css.styl');
     template(this.template, require('popup/popup.pug'));
+    template('popup__buttons', require('popup/popup__buttons.pug'));
 
     $(document).on('click', selectors.toggle, function (e) {
         e.preventDefault();
@@ -136,7 +137,7 @@ function Popup() {
             $status.empty();
             $status.append($(value));
         } else {
-            return $status.html();
+            return $status.html(); 
         }
     };     
 

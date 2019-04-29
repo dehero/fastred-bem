@@ -30,10 +30,10 @@
     display flex
 
   &_showing
-    animation popup_showing $popup__duration_showing ease 0ms 1 normal running
+    animation popup_showing $popup__duration_showing
 
   &_hiding
-    animation popup_hiding $popup__duration_hiding ease 0ms 1 normal running
+    animation popup_hiding $popup__duration_hiding
 
 .popup__window
   display flex
@@ -74,6 +74,7 @@
 
 .popup__close
   flex-shrink 0
+  padding-left $popup__padding_h
   padding-bottom $popup__padding_v
 
 .popup__footer
@@ -127,7 +128,7 @@
     margin 0
     box-sizing content-box
 
-    &:active, &:hover
+    &:active, &:hover 
       color $color
 
     &:focus

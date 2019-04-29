@@ -1,0 +1,41 @@
+$carousel__duration   	  ?= 400ms
+$carousel__animation  	  ?= 'slide'
+$carousel__control-color  ?= alpha(black, 50%)
+
+carousel__animation(hiding = false, reverse = false)         
+  if $carousel__animation == 'mix'
+		// mix
+    if hiding
+      0%
+        opacity 1
+      100%
+        opacity 0
+    else
+      0%
+        opacity 0
+      100%
+        opacity 1
+  else
+		// slide
+    if hiding 
+      if reverse 
+        0%
+          margin-left 0
+        100%
+          margin-left 100%
+      else
+        0%
+          margin-left 0
+        100%
+          margin-left -100%
+    else
+      if reverse
+        0%
+          margin-left -100%
+        100%
+          margin-left 0%        
+      else 
+        0%
+          margin-left 100%
+        100%
+          margin-left 0% 

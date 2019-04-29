@@ -4,7 +4,7 @@ function Button() {
     this.template = 'button';
     this.selector = '.button';
 
-    var that = this;
+    var Button = this;
     var $ = require('jquery');
     var classes = {
         disabled: 'button_disabled'
