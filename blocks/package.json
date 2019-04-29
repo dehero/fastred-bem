@@ -1,8 +1,0 @@
-{
-    "name": "fastred",
-    "version": "0.1.0",
-    "description": "Procedural micro-framework for PHP server and JavaScript frontend.",
-    "author": "Dehero",
-    "license": "MIT",
-    "main": "./fastred"
-}
