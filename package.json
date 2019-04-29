@@ -19,7 +19,7 @@
     "iconfont-webpack-plugin": "^3.0.1",
     "jquery": "^3.2.1",
     "jquery-inview": "^1.1.2",
-    "jquery-taphold": "^1.0.0",
+    "jquery-touch-events": "^1.0.7",
     "mark.js": "^8.11.1",
     "merge-webpack-plugin": "^0.2.1",
     "mkdirp": "^0.5.1",
