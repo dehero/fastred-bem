@@ -1,0 +1,40 @@
+@require 'slider/slider'
+
+.slider
+    display block
+    position relative
+    background $slider__bg
+    if $slider__border-size > 0
+        border $slider__border-size solid $slider__border-color
+    else
+        border none    
+    border-radius $slider__border-radius
+    height $slider__size
+    width 20rem
+
+.slider__selection
+    display block
+    background $slider__selection-color
+    if $slider__border-radius > 0
+        border-radius $slider__border-radius
+    position absolute
+    top 0
+    left 0 
+    bottom 0
+    width 50%
+    z-index 1
+
+.slider__handle
+    box-sizing border-box
+    border-radius $slider__handle-size
+    margin-left - ($slider__handle-size / 2)
+    margin-top - ($slider__handle-size / 2)
+    height $slider__handle-size
+    width $slider__handle-size
+    position absolute
+    top 50%
+    left 50%
+    z-index 2
+
+.slider__input
+    display none

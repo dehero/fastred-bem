@@ -1,0 +1,56 @@
+//- @pugdoc 
+    name: slider
+    options:
+        - {string} name
+        - {number} min
+        - {number} max
+        - {number} precision
+        - {number} step
+        - {any} value        
+        - {bool} range
+
+- fastredRequire('arr', 'float', 'template', 'var')
+
+- precision = varIsNotEmpty(options.precision) ? options.precision : 0
+- min = varIsNotEmpty(options.min) ? options.min : 0
+- max = varIsNotEmpty(options.max) ? options.max : 100
+- step = varIsNotEmpty(options.step) ? options.step : 1
+
+- attributes['data-max'] = max
+- attributes['data-min'] = min
+- attributes['data-precision'] = precision
+- attributes['data-step'] = step
+
+.slider&attributes(attributes)           
+    if options.range
+        if varIsArr(options.value)
+            - value1 = options.value[0]
+            - value2 = options.value[1]
+        else if varExists(options.value)
+            - value1 = min
+            - value2 = options.value        
+        else
+            - value1 = min
+            - value2 = max
+        - percent1 = (value1 - min) / (max - min) * 100
+        - percent2 = (value2 - min) / (max - min) * 100
+        - percent = percent2 - percent1
+        .slider__selection(style='left:' + percent1 + '%;width:' + percent + '%')
+        - handle1Attrs = {class: 'slider__handle slider__handle_1', style: 'left:' + percent1 + '%'}
+        - handle2Attrs = {class: 'slider__handle slider__handle_2', style: 'left:' + percent2 + '%'}
+        != templateToHtml('button', null, handle1Attrs)        
+        != templateToHtml('button', null, handle2Attrs)
+        input.slider__input.slider__input_1(name=(varIsNotEmpty(options.name) ? options.name + '[0]' : null) value=value1)
+        input.slider__input.slider__input_2(name=(varIsNotEmpty(options.name) ? options.name + '[1]' : null) value=value2)
+    else
+        - value = varExists(options.value) ? options.value : min
+        - value = min + floatGetRound((value - min) / step) * step
+        if value < min
+            - value = min
+        if value > max
+            - value = max
+        - percent = (value - min) / (max - min) * 100        
+        - handleAttrs = {class: 'slider__handle', style: 'left:' + percent + '%'}
+        .slider__selection(style='width:' + percent + '%')
+        != templateToHtml('button', null, handleAttrs)
+        input.slider__input(name=options.name value=value)
