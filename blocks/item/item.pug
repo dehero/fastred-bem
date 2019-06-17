@@ -10,18 +10,21 @@
         - {bool} header
         - {integer} depth
         - {bool} expanded
-        - {string} contentTemplate
+        - {string} contentTemplate        
 
 - fastredRequire('css', 'locale', 'template', 'var')
 
-- attributes.class = cssBemClassArr(attributes.class, {'item_selected': options.selected, 'item_type_': options.type, 'item_header': options.header})
+- attributes.class = cssBemClassArr(attributes.class, {'item_selected': options.selected, 'item_type_': options.type, 'item_header': options.header, 'item_depth_': options.depth})
 - contentTemplate = varIsNotEmpty(options.contentTemplate) ? options.contentTemplate : 'item__content'
 
 .item&attributes(attributes)(data-value=options.value)
 
     if options.depth > 0
-        .item__field.item__button(class='item__button_depth_' + options.depth)
-            if varIsNotEmpty(options.data.items)
-                != templateToHtml('font-icon', {id: 'arrow-down'})
+        if varIsNotEmpty(options.data.items)
+            if options.expanded
+                - caret = 'arrow-down'
+            else
+                - caret = 'arrow-right'
+        != templateToHtml('button', {plain: true, caret: caret}, 'item__offset')
 
     != templateToHtml(contentTemplate, options)

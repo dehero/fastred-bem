@@ -45,6 +45,7 @@ function CodeEditor() {
         focused: 'code-editor_focused'
     };
 
+    var Form = require('form');
     require('toolbar');
     require('code-editor/code-editor.css.styl');
     template(this.template, require('code-editor/code-editor.pug'));
@@ -91,7 +92,7 @@ function CodeEditor() {
 
         // Copy text to hidden textarea on parent form submit
         // to be able to send text with other form data
-        $textarea.closest('form').submit(function() {
+        $textarea.closest('form').on('submit ' + Form.events.submit, function() {
             $textarea.val(CodeEditor.value(component));
         });
     };

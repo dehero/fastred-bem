@@ -6,17 +6,27 @@ function Button() {
 
     var Button = this;
     var $ = require('jquery');
-    var classes = {
-        disabled: 'button_disabled'
+    var classes = {        
+        disabled: 'button_disabled',
+        processing: 'button__processing'
     };
     var selectors = {
-        input: '.button__input'
+        caret: '.button__caret',
+        input: '.button__input',
+        processing: '.button__processing'
     }
 
-    require('font-icon');
+    var Spinner = require('spinner');
+    var FontIcon = require('font-icon');
     require('button/button.css.styl');
     template(this.template, require('button/button.pug'));
     template('button__content', require('button/button__content.pug'));
+
+    this.caret = function(component, value) {
+        var $fontIcon = $(component).find(selectors.caret).children();
+
+        return FontIcon.id($fontIcon, value);
+    }
 
     this.disabled = function(component, value) {
         var $component = $(component);
@@ -58,6 +68,24 @@ function Button() {
             $input.prop('checked', value);
         } else {
             return $input.prop('checked');
+        }
+    };
+
+    this.processing = function(component, value) {
+        var $component = $(component);
+        var $processing = $component.find(selectors.processing);
+        var oldValue = $processing.length > 0;
+
+        if (typeof value !== 'undefined') {
+            if (oldValue !== value) {
+                if (value) {
+                    $component.prepend(Spinner.create(null, classes.processing));
+                } else {
+                    $processing.remove(); 
+                }
+            }
+        } else {
+            return oldValue;
         }
     };
 

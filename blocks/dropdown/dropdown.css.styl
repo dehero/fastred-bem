@@ -1,9 +1,5 @@
 @require 'dropdown/dropdown'
 
-$dropdown__bubble-position  = 20%
-$dropdown__bubble-offset    = .75rem
-$dropdown__z-index = 99
-
 .dropdown
   position relative
   display inline-flex
@@ -23,6 +19,7 @@ $dropdown__z-index = 99
     border none
   border-radius $dropdown__border-radius
   cursor auto
+  padding-top $dropdown__padding_v
 
 .dropdown_bubble.dropdown_pressed
 .dropdown_bubble.dropdown_hover:hover

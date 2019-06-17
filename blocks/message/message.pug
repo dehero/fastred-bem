@@ -1,0 +1,21 @@
+//- @pugdoc
+    name: message
+    options:
+        - {string} content
+        - {string} contentHtml
+        - {bool} close
+        - {number} timeout
+
+- close = varExists(options.close) ? options.close : true
+- timeout = options.timeout === true ? 10000 : options.timeout
+if timeout > 0
+    - attributes['data-timeout'] = timeout
+
+.message&attributes(attributes)
+    .message__content
+        if varIsNotEmpty(options.contentHtml)
+            != options.contentHtml
+        else
+            = options.content
+    if close
+        != templateToHtml('button', {plain: true, icon: 'close'}, 'message__close')            

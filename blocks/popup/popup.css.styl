@@ -20,7 +20,7 @@
   bottom 0
   z-index $popup__z-index
   justify-content center
-  align-items start  
+  align-items start
 
   +screen__wider_mobile()
     padding $popup__offset_v $popup__offset_h
@@ -34,6 +34,11 @@
 
   &_hiding
     animation popup_hiding $popup__duration_hiding
+
+.popup__spinner
+  display none
+  color $popup__text-color_plain
+  font-size 3rem
 
 .popup__window
   display flex
@@ -62,6 +67,7 @@
     border-radius $popup__border-radius
     border-bottom-left-radius 0
     border-bottom-right-radius 0
+    max-width $popup__content-max-width
 
 .popup__title  
   line-height 1
@@ -87,7 +93,8 @@
   +screen__wider_mobile()
     border-radius $popup__border-radius
     border-top-left-radius 0
-    border-top-right-radius 0    
+    border-top-right-radius 0
+    max-width $popup__content-max-width
 
 .popup__footer
   display flex
@@ -184,23 +191,34 @@
 
   &_s
 
+    .popup__header
     .popup__content
+    .popup__footer  
       max-width $popup__content-max-width_s
 
   &_l
 
+    .popup__header
     .popup__content
+    .popup__footer  
       max-width $popup__content-max-width_l
 
   &_xl
 
+    .popup__header
     .popup__content
+    .popup__footer  
       max-width $popup__content-max-width_xl
 
 .popup_spring
   justify-content stretch
 
+  .popup__window    
+    flex-grow 1
+
+  .popup__header
   .popup__content
+  .popup__footer  
     max-width none
 
 .popup_embed
@@ -232,3 +250,13 @@
 
   +screen__wider_mobile()
     display none
+
+.popup_loading
+  align-items center
+  justify-content center
+
+  .popup__window
+    display none
+
+  .popup__spinner
+    display inline-block

@@ -1,7 +1,19 @@
+//- @pugdoc
+    name: treeview__item
+    options:
+        - {string} itemTemplate
+        - {object} data
+        - {number} depth
 
-.treeview__item
-    != templateToHtml(options.itemTemplate, {data: options.item, type: 'list', depth: options.depth})
-    if varIsNotEmpty(options.item.items)
+- fastredRequire('css', 'template', 'var') 
+
+- data = varIsHash(options.data) ? options.data : {}
+- attributes.class = cssBemClassArr(attributes.class, {'treeview__item_expanded': data.expanded})
+- itemTemplate = varIsStr(options.itemTemplate) ? options.itemTemplate : 'item'
+
+.treeview__item&attributes(attributes)
+    != templateToHtml(itemTemplate, {data: data, type: 'list', depth: options.depth})
+    if varIsNotEmpty(data.items)
         .treeview__group
-            each item in options.item.items
-                != templateToHtml('treeview__item', {itemTemplate: options.itemTemplate, item: item, depth: options.depth + 1})
+            each item in data.items
+                != templateToHtml('treeview__item', {itemTemplate: itemTemplate, data: item, depth: options.depth + 1})

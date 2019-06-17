@@ -103,13 +103,18 @@
       border-bottom-left-radius 0
       margin-left 0 - $button__border-size
 
+.button__processing
+  align-self center
+
+  & + .button__icon
+  & + .button__title
+  & + .button__caret
+    margin-left .5em  
+
 .button__icon
-  //display inline-block
-  //display inline
   height auto
   vertical-align middle
   line-height normal
-  //align-items center
 
   & + .button__title
   & + .button__caret

@@ -28,12 +28,19 @@ function Item() {
 
     this.events = {
         beforeSelectedChange:   'beforeSelectedChange',
+        expandedChange:         'expandedChange',
         selectedChange:         'selectedChange',
         sort:                   'sort'
     };
 
-    var that = this;
+    var selectors = {
+        offset: '.item__offset'
+    }    
+
+    var Item = this;
     var $ = require('jquery');
+    var Button = require('button');
+
     require('mark.js/dist/jquery.mark.js');
 
     require('item/item.css.styl');
@@ -47,7 +54,38 @@ function Item() {
     };
 
     this.canOpen = function(component) {
-        return typeof that.value(component) !== 'undefined';
+        return typeof Item.value(component) !== 'undefined';
+    };
+
+    this.init = function(component) {
+        var $component = $(component);
+        var $offset = $component.find(selectors.offset);
+
+        $offset.on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            Item.expanded($component, !Item.expanded($component));
+        });
+    }
+
+    this.expanded = function(component, value) {
+        var $component = $(component);
+        var $offset = $component.find(selectors.offset);
+        var oldValue = Button.caret($offset) === 'arrow-down';
+        
+        if (typeof value !== 'undefined') {
+            if (oldValue !== value) {
+                if (value) {
+                    Button.caret($offset, 'arrow-down');
+                } else {
+                    Button.caret($offset, 'arrow-right');
+                }
+                $component.trigger(Item.events.expandedChange);
+            }
+        } else {
+            return oldValue;
+        }        
     };
 
     this.open = function(component) {
@@ -80,9 +118,9 @@ function Item() {
 
         if (typeof value !== 'undefined') {
             if (value !== oldValue) {
-                if (!noEvent) $component.trigger(that.events.beforeSelectedChange);
+                if (!noEvent) $component.trigger(Item.events.beforeSelectedChange);
                 $component.toggleClass(this.classSelected, value);
-                if (!noEvent) $component.trigger(that.events.selectedChange);
+                if (!noEvent) $component.trigger(Item.events.selectedChange);
             }
         } else {
             return oldValue;

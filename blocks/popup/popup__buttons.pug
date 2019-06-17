@@ -1,18 +1,18 @@
 //- @pugdoc
     name: popup__buttons
     options:
-        - {string} submitTitle
-        - {string} submitIcon
+        - {string} confirmTitle
+        - {string} confirmIcon
         - {string} cancelTitle
         - {string} cancelIcon
         - {string} width
-        - {string} size
+        - {string} size 
 
 - fastredRequire('locale', 'template', 'var')
 
-- submitTitle = varIsNotEmpty(options.submitTitle) ? options.submitTitle : localeGetStr('ok')
+- confirmTitle = varIsNotEmpty(options.confirmTitle) ? options.confirmTitle : localeGetStr('ok')
 - cancelTitle = varIsNotEmpty(options.cancelTitle) ? options.cancelTitle : localeGetStr('cancel')
 
 .toolbar.toolbar_plain.toolbar_nowrap 
-    .toolbar__item!= templateToHtml('button', {title: submitTitle, icon: options.submitIcon, width: options.width, size: options.size, main: true}, 'popup__submit')
+    .toolbar__item!= templateToHtml('button', {title: confirmTitle, icon: options.confirmIcon, width: options.width, size: options.size, main: true}, 'popup__confirm')
     .toolbar__item!= templateToHtml('button', {title: cancelTitle, icon: options.cancelIcon, width: options.width, size: options.size}, 'popup__cancel popup__hide')

@@ -2,7 +2,6 @@
 @require input
 
 $button__bg                             ?= $color_button
-$button__bg_hover                       ?= $color_button-hover
 $button__bg_pressed                     ?= $color_button-pressed
 $button__bg_main                        ?= $color_main
 $button__bg_main-pressed                ?= $color_main-pressed
@@ -35,8 +34,8 @@ button__pressed(main = false, plain = false)
   box-shadow none
 
   if plain
-    border none
-    background none    
+    border none 
+    background none
     if main      
       color $button__text-color_plain-main-pressed
     else

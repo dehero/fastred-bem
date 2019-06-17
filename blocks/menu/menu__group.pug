@@ -1,0 +1,11 @@
+//- @pugdoc
+    name: menu__group
+    options:
+        - {string} title
+        - {array} items
+
+.menu__group&attributes(attributes)
+    if varIsNotEmpty(options.title)
+        .menu__group-title= options.title
+    for item in options.items
+        != templateToHtml('menu__item', item)

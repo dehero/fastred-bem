@@ -19,16 +19,14 @@
 
   &:focus
     input__focus(true)
-
+ 
 .treeview__item
   display flex
   flex-flow row wrap
   width 100%
 
 .treeview__group
-  display flex
-  flex-flow row wrap
-  width 100%
+  display none 
 
 .treeview__content
   display flex
@@ -55,3 +53,10 @@
     overflow hidden
     overflow-y scroll
     flex-grow 1
+
+.treeview__item_expanded
+
+  & > .treeview__group
+    display flex    
+    flex-flow row wrap
+    width 100%

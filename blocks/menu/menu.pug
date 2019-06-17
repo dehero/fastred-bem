@@ -1,0 +1,15 @@
+//- @pugdoc
+    name: menu
+    options:
+        - {array} items
+            - {string} title
+            - {bool} checked
+            - {bool} group
+            - {array} items
+
+.menu&attributes(attributes)
+    for item in options.items
+        if item.group
+            != templateToHtml('menu__group', item)
+        else
+            != templateToHtml('menu__item', item) 

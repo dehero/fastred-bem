@@ -1,4 +1,5 @@
 @require color
+@require popup
 
 $body__bg                   ?= $color_bg
 
@@ -8,3 +9,6 @@ $body__padding_v            ?= 0
 $body__padding_h            ?= 0
 
 $body__header-height        ?= 0
+
+$body__message-max-width    ?= $popup__content-max-width
+$body__message-z-index      ?= $popup__z-index_top + 1

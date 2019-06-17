@@ -2,14 +2,17 @@
     name: button__content
     options: 
         - {string} icon
-        - {string} title 
+        - {string} title  
         - {string} caret
         - {string} iconClass
         - {string} titleClass
         - {string} caretClass
+        - {bool} processing        
 
 - fastredRequire('template')
 
+if options.processing 
+    != templateToHtml('spinner', null, 'button__processing')
 if varIsNotEmpty(options.icon)
     span.button__icon(class=options.iconClass)
         if varIsStr(options.icon)

@@ -1,0 +1,19 @@
+@require color
+
+@require 'spinner/spinner'
+
+@keyframes spinner
+    spinner__animation()
+
+.spinner
+    display inline-block
+    position relative    
+    box-sizing border-box
+    line-height 1em
+    width 1em
+    height 1em       
+    animation spinner 1s infinite linear
+    backface-visibility hidden
+
+.spinner_disabled
+    display none 

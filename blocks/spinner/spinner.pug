@@ -1,0 +1,11 @@
+//- @pugdoc
+    name: spinner
+    options:
+        - {bool} disabled
+
+- fastredRequire('css', 'template')
+
+- attributes.class = cssBemClassArr(attributes.class, 'spinner', {spinner_disabled: options.disabled})
+ 
+!= templateToHtml('font-icon', {id: 'spinner'}, attributes)
+//- span.spinner&attributes(attributes)

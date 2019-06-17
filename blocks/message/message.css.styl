@@ -1,0 +1,32 @@
+@require 'message/message'
+
+@keyframes message_closing
+  message__animation_closing()
+
+.message
+    background $message__bg
+    color $message__text-color
+    padding $message__padding_v $message__padding_h
+    if $message__border-size > 0
+        border $message__border-size solid $message__border-color
+    else
+        border none    
+    border-radius $message__border-radius        
+    box-sizing content-box
+    min-height 1rem    
+    overflow hidden
+    display flex
+    flex-flow row nowrap
+    align-items baseline
+
+    &_closing
+        animation message_closing $message__duration_closing
+
+.message__content
+    flex-grow 1
+
+.message__close
+    flex-shrink 0
+    flex-grow 0
+    padding $message__padding_v $message__padding_h
+    margin (- $message__padding_v) (- $message__padding_h)

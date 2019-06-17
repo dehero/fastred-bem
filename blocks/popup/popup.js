@@ -4,7 +4,7 @@ function Popup() {
     this.template = 'popup';
     this.selector = '.popup';
     this.events = {
-        submit: 'submit.popup'
+        confirm: 'confirm.popup'
     };
 
     var Popup = this;
@@ -20,7 +20,7 @@ function Popup() {
         content:    '.popup__content',
         hide:       '.popup__hide',
         status:     '.popup__status',
-        submit:     '.popup__submit',
+        confirm:    '.popup__confirm',
         title:      '.popup__title',
         toggle:     '.popup__show',
         top:        '.popup_top'
@@ -30,10 +30,12 @@ function Popup() {
         top:        'popup_top',
         visible:    'popup_visible',
         hiding:     'popup_hiding',
-        showing:    'popup_showing'
-    };
+        showing:    'popup_showing',
+        loading:    'popup_loading'
+    }; 
 
-    require('button');
+    require('spinner');
+    var Button = require('button');    
     require('toolbar');
     require('popup/popup.css.styl');
     template(this.template, require('popup/popup.pug'));
@@ -71,7 +73,7 @@ function Popup() {
     this.init = function(component) {
         var $component = $(component);
         var $buttonHide = $component.find(selectors.hide);
-        var $buttonSubmit = $component.find(selectors.submit);
+        var $buttonConfirm = $component.find(selectors.confirm);
 
         $component.click(function(e) {
             if (e.target !== this) return;
@@ -92,15 +94,34 @@ function Popup() {
             }
         });
 
-        $buttonSubmit.click(function(e) {
+        $buttonConfirm.click(function(e) {
             e.preventDefault();            
-            Popup.submit(component);
+            Popup.confirm(component);
         });
 
         $buttonHide.click(function(e) {
             e.preventDefault();
             Popup.hide(component);
         });        
+    };
+
+    this.confirm = function(component) {
+        var $component = $(component);
+
+        var e = $.Event(Popup.events.confirm);
+        $component.trigger(e);
+
+        if (!e.isDefaultPrevented()) {
+            Popup.hide(component); 
+        };        
+    };
+
+    this.confirming = function(component, value) {
+        var $buttonConfirm = $(component).find(selectors.confirm);
+
+        Button.disabled($buttonConfirm, value);
+        
+        return Button.processing($buttonConfirm, value);
     };
 
     this.content = function(component, value) {
@@ -122,6 +143,16 @@ function Popup() {
         }
     };
 
+    this.loading = function(component, value) {
+        var $component = $(component);
+
+        if (typeof value !== 'undefined') {
+            $component.toggleClass(classes.loading);
+        } else {
+            return $component.hasClass(classes.loading);
+        }
+    };
+
     this.status = function(component, value) {
         var $component = $(component);
         var $status = $component.find(selectors.status);
@@ -139,20 +170,13 @@ function Popup() {
         } else {
             return $status.html(); 
         }
-    };     
-
-    this.submit = function(component) {
-        var $component = $(component);
-
-        $component.trigger(Popup.events.submit);
-        Popup.hide(component);
     };
 
     this.title = function(component, value) {
         var $component = $(component);
         var $title = $component.find(selectors.title);
 
-        return $title.text(value); 
+        return $title.text(value);
     };
 
     this.titleHtml = function(component, value) {

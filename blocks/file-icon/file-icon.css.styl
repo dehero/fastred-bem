@@ -1,0 +1,63 @@
+@require 'file-icon/file-icon'
+
+.file-icon
+    width 0.75em
+    height 1em    
+    position relative
+    padding $file-icon__corner-size 0 0
+    box-sizing border-box
+    font-family sans-serif
+
+    &:before,
+    &:after
+        position absolute
+        content ''
+        pointer-events none
+
+    &:before
+        left 0
+        top 0
+        bottom 0
+        background-color $file-icon__bg 
+        right $file-icon__corner-size
+
+        border-top-left-radius $file-icon__border-radius
+        border-bottom-left-radius $file-icon__border-radius           
+        border-color $file-icon__corner-bg
+        border-width 1px
+        border-style solid
+        border-right-style none        
+
+    &:after
+        width 0
+        height 0
+        border-style solid
+        border-width $file-icon__corner-size 0 0 $file-icon__corner-size
+        border-color transparent transparent transparent $file-icon__corner-bg
+        top 0
+        right 0
+
+    &__content
+        background-color $file-icon__bg 
+        top $file-icon__corner-size        
+        position absolute
+        left 0
+        bottom 0
+        right 0
+        overflow hidden
+        border-bottom-left-radius $file-icon__border-radius
+        border-bottom-right-radius $file-icon__border-radius
+        border-color $file-icon__corner-bg
+        border-width 1px
+        border-style solid
+        border-top-style none
+        text-align center
+        display flex
+        align-items center
+        justify-content center
+   
+        &:after
+            content attr(data-type)
+            font-size .3em
+            color $file-icon__text-color
+            opacity .9

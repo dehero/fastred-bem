@@ -1,0 +1,15 @@
+//- @pugdoc
+    name: message-stack
+    options:
+        - {array} items
+
+- fastredRequire('template', 'var')
+
+- items = varIsStr(options.items) ? [{content: options.items}] : (varIsHash(options.items) ? [options.items] : options.items)
+
+.message-stack&attributes(attributes)
+    if varIsArr(items)
+        for item in items
+            if varIsStr(item)
+                - item = {content: item}
+            != templateToHtml('message', item, 'message-stack__item')

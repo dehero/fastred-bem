@@ -10,6 +10,7 @@
         - {bool} readonly
         - {string} placeholder
         - {bool} disabled
+        - {bool} required
 
 - fastredRequire('arr', 'css')
 
@@ -17,4 +18,4 @@
 - type = arrGetFound(['password'], options.type)
 - attributes.class = cssBemClassArr(attributes.class, {'input_spring': options.spring, 'input_size_': size, 'input_cut_': options.cut})
 
-input.input(value=options.value type=type name=options.name readonly=options.readonly disabled=options.disabled placeholder=options.placeholder)&attributes(attributes)
+input.input(value=options.value type=type name=options.name readonly=options.readonly disabled=options.disabled placeholder=options.placeholder required=options.required)&attributes(attributes)

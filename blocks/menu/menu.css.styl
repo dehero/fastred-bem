@@ -1,0 +1,26 @@
+@require color
+
+.menu
+    background white
+    display flex
+    flex-flow column nowrap
+    justify-content stretch
+
+.menu__item
+    display block
+    padding .5rem 1rem 
+    margin 0
+    
+    &:hover
+        background lightblue
+        
+    &_active
+        background $color_main 
+        color white
+
+.menu__divider
+    height 0
+    padding 0
+    margin .5rem 0
+    overflow hidden
+    border-top 1px solid #e9ecef

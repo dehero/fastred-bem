@@ -3,6 +3,16 @@ function Component() {
     var inheritors = {};
     var $ = require('jquery');
 
+    this.classByPrefix = function(component, prefix) {
+        var classes = $(component).attr('class').split(/\s+/);
+
+        for (var i = 0; i < classes.length; i++) {
+            if (classes[i].indexOf(prefix) === 0) {
+                return classes[i];
+            }
+        }
+    };
+
     this.create = function(options, attributes) {
         var component = null;
 
@@ -36,7 +46,7 @@ function Component() {
                     // Some components meet both parent and child selectors and inherit parent functions, including "init"
                     // function. Check here that each init function runs only once on component to prevent doubling.
                     if (component.inits.indexOf(init) < 0) {
-                        init(component);
+                        init.call(Inheritor, component);
                         component.inits.push(init);
                     }
                 });

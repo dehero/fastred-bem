@@ -1,0 +1,26 @@
+@require color
+
+$message__bg                    ?= $color_message
+$message__border-color          ?= darken($color_message, 15%)
+$message__border-size           ?= 0
+$message__border-radius         ?= .25rem
+$message__text-color            ?= darken($color_message, 85%)
+
+$message__padding_v             ?= 0.5rem
+$message__padding_h             ?= 0.75rem
+
+$message__duration_closing      ?= 400ms
+$message__duration_closing-auto ?= 1000ms
+
+message__animation_closing()
+  0%
+    opacity 1
+  100%
+    opacity 0
+    if auto
+        height 0
+        padding-top 0
+        padding-bottom 0    
+        margin-top 0
+        margin-bottom 0   
+        min-height 0    

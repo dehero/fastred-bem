@@ -1,15 +1,16 @@
 //- @pugdoc
     name: field
     options:
-        - {string} title
-        - {string} name
         - {string} template
-        - {string} hint
+        - {string} title        
         - {string} size
-        - {string} required
+        - {bool} required
+        - {any} attributes
+        - {bool} vertical
+        - {string} hint
+        - {string} error        
         - {string} labelClass
         - {string} controlClass
-        - attributes
 
 - fastredRequire('arr', 'css', 'int', 'obj', 'template', 'var')
 
@@ -17,11 +18,12 @@
 - size = arrGetFound(['s', 'l', 'xl'], options.size)
 - controlAttributes = templateAttrsToObj(options.attributes)
 - controlAttributes.id = 'field_' + intCounter()
-- attributes.class = cssBemClassArr(attributes.class, {'field_size_': size, 'field_required': options.required}) 
+- attributes.class = cssBemClassArr(attributes.class, {'field_size_': size, 'field_required': options.required, 'field_vertical': options.vertical}) 
 
 .field&attributes(attributes)
     label.field__label(for=controlAttributes.id class=options.labelClass)!= title
     .field__control(class=options.controlClass)
         != templateToHtml(options.template, options, controlAttributes)
+        p.field__error= options.error
         if options.hint
             p.field__hint!= options.hint

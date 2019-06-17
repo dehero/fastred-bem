@@ -51,11 +51,15 @@ for key, value in $item__type_grid
     &:active
       background $item__bg_selected-pressed
 
-    .item__button
-      text-align right
-      padding-right 0
+.item__offset
+  item__cell()
+  justify-content flex-end
+  padding-right 0
+  margin 0
 
-      for depth in (1..9)
+for depth in (1..9)
 
-        &_depth_{depth}
-          width 1 + 2 * (depth - 1) rem
+  .item_depth_{depth}
+
+    .item__offset
+      width 1 + 2 * (depth - 1) rem

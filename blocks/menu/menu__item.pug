@@ -1,0 +1,8 @@
+//- @pugdoc
+    name: menu__item
+    options:
+        - {string} title
+        - {bool} checked
+
+.menu__item&attributes(attributes)
+    != templateToHtml('button', {title: options.title, plain: true})

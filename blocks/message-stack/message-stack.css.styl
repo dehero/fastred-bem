@@ -1,0 +1,22 @@
+@require message
+
+.message-stack
+    pointer-events none
+
+.message-stack__item
+    pointer-events auto
+
+    & + .message-stack__item:not(:first-child):not(:last-child)
+        margin-top - $message__border-size
+        border-radius 0        
+
+    &:not(:only-child)
+
+        &:first-child
+            border-bottom-left-radius 0
+            border-bottom-right-radius 0
+
+        &:last-child
+            margin-top - $message__border-size
+            border-top-left-radius 0
+            border-top-right-radius 0

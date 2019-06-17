@@ -81,7 +81,15 @@ function Select() {
     this.value = function(component, value) {
         var $control = $(component).data(dataKeys.$control);
 
-        return Input.value($control, value);
+        if (typeof value !== 'undefined') {
+            $control.val(value);
+
+            if ($control.prop('selectedIndex') < 0) {
+                $control.prop('selectedIndex', 0);
+            };
+        } else {
+            return $control.val();
+        }        
     }
 
     Input.register(this);

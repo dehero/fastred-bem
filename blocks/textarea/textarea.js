@@ -10,6 +10,7 @@ function Textarea() {
     };
 
     require('textarea/textarea.css.styl');
+    template(this.template, require('textarea/textarea.pug'));
 
     this.init = function(component) {
         if ($(component).hasClass(classes.autosize)) {

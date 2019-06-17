@@ -1,10 +1,21 @@
 var Component = require('component');
 
+function TreeviewItem() {
+    this.template = 'treeview__item';
+    this.selector = '.treeview__item';
+
+    var TreeviewItem = this;    
+
+    template(TreeviewItem.template, require('treeview/treeview__item.pug'));    
+
+    Component.register(TreeviewItem);
+}
+
 function Treeview() {
     this.template = 'treeview';
     this.selector = '.treeview';
 
-    var that = this;
+    var Treeview = this;
     var $ = window.jQuery = require('jquery');
     var selectors = {
         content:        '.treeview__content'
@@ -14,21 +25,24 @@ function Treeview() {
         itemOpen:        'item-open.treeview'
     };
 
+    var classes = {
+        itemExpanded: 'treeview__item_expanded'
+    }
     var dataKeys = {
         itemTemplate:   'item-template',
         modeLocked:     'mode-locked',
         mode:           'mode',
         tapholdItem:    'taphold-item',
-        type:           'type'
+        type:           'type' 
     };
 
-    require('jquery-taphold');
+    require('jquery-touch-events')($);
     require('item');
     require('treeview/treeview.css.styl');
     template(this.template, require('treeview/treeview.pug'));
 
     this.add = function(component, items) {
-        that.insert(component, items, that.count(component));
+        Treeview.insert(component, items, Treeview.count(component));
     };
 
     this.clear = function(component) {
@@ -57,14 +71,13 @@ function Treeview() {
     this.insert = function(component, item, position) {
         var $component = $(component);
         var $content = $component.data('$content');
-        var ItemComponent = $component.data('ItemComponent');
 
         var items = varIsArr(item) ? item : [item];
         position = position || 0;
         var components = [];
 
         for(var i = 0; i < items.length; i++) {
-            components.push(ItemComponent.create({data: items[i], type: that.type(component)}));
+            components.push(new TreeviewItem().create({data: items[i], type: Treeview.type(component), depth: 1, itemTemplate: $component.data(dataKeys.itemTemplate)}));
         }
 
         if(position <= 0) {
@@ -76,7 +89,7 @@ function Treeview() {
     };
 
     this.clearSelection = function(component, noEvent) {
-        that.selection(component, [], noEvent);
+        Treeview.selection(component, [], noEvent);
     };
 
     this.count = function(component) {
@@ -95,7 +108,7 @@ function Treeview() {
             switch(e.keyCode) {
                 // DEL
                 case 46:
-                    that.deleteSelection(component);
+                    Treeview.deleteSelection(component);
                     break;
             }
         });
@@ -109,17 +122,18 @@ function Treeview() {
                 return;
             }
 
-            if (that.mode(component) === 'select' && !ItemComponent.selected(this)) {
+            if (Treeview.mode(component) === 'select' && !ItemComponent.selected(this)) {
                 ItemComponent.selected(this, true);
+            }
+        });
+
+        $content.on(ItemComponent.events.expandedChange, ItemComponent.selector, function(e) {
+            var $item = $(this).parent();
+
+            if (ItemComponent.expanded(this)) {
+                $item.addClass(classes.itemExpanded);
             } else {
-                var $group = $(this).next();
-                if ($group.is(':visible')) {
-                    $group.slideUp();
-                } else {
-                    $group.slideDown();
-                }
-                //.toggle();
-                //ItemComponent.open(this);
+                $item.removeClass(classes.itemExpanded);
             }
         });
 
@@ -131,8 +145,8 @@ function Treeview() {
                 $content.removeData(dataKeys.tapholdItem);
             });
 
-            if (that.mode(component) === 'browse' && !that.modeLocked(component)) {
-                that.mode(component, 'select');
+            if (Treeview.mode(component) === 'browse' && !Treeview.modeLocked(component)) {
+                Treeview.mode(component, 'select');
                 ItemComponent.selected(this, true);
             } else {
                 ItemComponent.open(this);
@@ -140,20 +154,16 @@ function Treeview() {
         });
 
         $content.on(ItemComponent.events.beforeSelectedChange, ItemComponent.selector, function(e) {
-            that.clearSelection(component, true);
+            Treeview.clearSelection(component, true);
         });
 
         $content.on(ItemComponent.events.selectedChange, ItemComponent.selector, function(e) {
-            $component.trigger(that.events.selectionChange);
+            $component.trigger(Treeview.events.selectionChange);
         });
     };
 
     this.modeLocked = function(component) {
         return typeof $(component).attr('data-' + dataKeys.modeLocked) !== 'undefined';
-    };
-
-    this.type = function(component) {
-        return arrGetFound(['list', 'grid', 'table'], $(component).data(dataKeys.type), 'list');
     };
 
     this.mode = function(component, value) {
@@ -164,7 +174,7 @@ function Treeview() {
             value = arrGetFound(['browse', 'select'], value, 'browse');
 
             if (value !== currentMode) {
-                that.clearSelection(component);
+                Treeview.clearSelection(component);
                 $(component).data(dataKeys.mode, value);
             }
 
@@ -202,7 +212,7 @@ function Treeview() {
         } else {
             var result = [];
 
-            $content.children().each(function () {
+            $content.find(ItemComponent.selector).each(function () {
                 if (ItemComponent.selected(this)) {
                     result.push(ItemComponent.value(this));
                 }
@@ -232,9 +242,10 @@ function Treeview() {
         }
     };
 
-    Component.register(this);
+    Component.register(Treeview);
 }
 
 Treeview.prototype = Component;
+TreeviewItem.prototype = Component;
 
 module.exports = new Treeview();

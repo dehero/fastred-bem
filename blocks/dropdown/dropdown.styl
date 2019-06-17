@@ -1,6 +1,7 @@
 @require color
 @require button
 @require input
+@require popup
 
 $dropdown__bg-color           ?= $color_panel
 $dropdown__bg                 ?= $dropdown__bg-color
@@ -11,3 +12,7 @@ $dropdown__border-size        ?= $input__border-size
 
 $dropdown__padding_v          ?= .5rem
 $dropdown__padding_h          ?= 0
+
+$dropdown__bubble-position    = 20%
+$dropdown__bubble-offset      = .75rem
+$dropdown__z-index            = $popup__z-index - 1
