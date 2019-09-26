@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Checkbox() {
+    fastredRequire('template');
+    
     this.template = 'checkbox';
     this.selector = '.checkbox';
 

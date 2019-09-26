@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function FileIcon() {
+    fastredRequire('template');
+    
     this.template = 'file-icon';
     this.selector = '.file-icon';
     

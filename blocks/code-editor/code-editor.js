@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function aceInitialize(obj, options, callback) {
+    fastredRequire('frontend-var');
+
     require.ensure([], function(require) {
         var ace = require('brace');
 
@@ -32,6 +34,8 @@ function aceInitialize(obj, options, callback) {
 }
 
 function CodeEditor() {
+    fastredRequire('arr', 'frontend-var', 'template', 'var');
+
     this.template = 'code-editor';
     this.selector = '.code-editor';
 

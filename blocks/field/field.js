@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Field() {
+    fastredRequire('template');
+    
 	this.template = 'field';
 	this.selector = '.field';
 

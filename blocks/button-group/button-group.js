@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function ButtonGroup() {
+    fastredRequire('template');
+    
     this.template = 'button-group';
     this.selector = '.button-group';
 

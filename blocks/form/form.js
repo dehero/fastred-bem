@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Form() {
+	fastredRequire('template');
+	
 	this.template = 'form';
 	this.selector = '.form';
 
@@ -69,7 +71,7 @@ function Form() {
 
 		$component.submit(function(e) {
 			e.stopImmediatePropagation();
-			
+
 			var newEvent = $.Event(Form.events.submit);
 			$component.trigger(newEvent);
 						

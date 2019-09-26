@@ -1,6 +1,8 @@
 var Component = require('component'); 
 
-function Button() { 
+function Button() {
+    fastredRequire('template');
+    
     this.template = 'button';
     this.selector = '.button';
 

@@ -1,4 +1,6 @@
 function Component() {
+    fastredRequire('template');
+    
     var Component = this;
     var inheritors = {};
     var $ = require('jquery');

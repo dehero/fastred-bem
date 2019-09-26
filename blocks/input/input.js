@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Input() {
+    fastredRequire('template');
+    
     this.template = 'input';
     this.selector = '.input';
 

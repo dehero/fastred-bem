@@ -1,6 +1,8 @@
 var Component = require('component'); 
 
-function Carousel() { 
+function Carousel() {
+    fastredRequire('template');
+
     this.template = 'carousel';
     this.selector = '.carousel';
 

@@ -1,6 +1,8 @@
 var Input = require('component');
 
 function InputSearch() {
+    fastredRequire('template');
+    
     this.template = 'input-search';
     this.selector = '.input-search';
 
