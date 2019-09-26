@@ -12,6 +12,8 @@ function TreeviewItem() {
 }
 
 function Treeview() {
+    fastredRequire('arr', 'template');
+
     this.template = 'treeview';
     this.selector = '.treeview';
 

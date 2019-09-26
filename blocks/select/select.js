@@ -1,6 +1,8 @@
 var Input = require('input');
 
 function Select() {
+    fastredRequire('template');
+    
     this.template = 'select';
     this.selector = '.select';
 

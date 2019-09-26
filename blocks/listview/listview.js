@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function ListView() {
+    fastredRequire('arr', 'template');
+
     this.template = 'listview';
     this.selector = '.listview';
 
@@ -24,8 +26,13 @@ function ListView() {
         search:         'search',
         tapholdItem:    'taphold-item',
         type:           'type'
-    };
+    }; 
 
+    var classes = {
+        loading:    'listview_loading'
+    };        
+
+    require('spinner');
     require('jquery-touch-events')($);
     require('item');
     require('listview/listview.css.styl');
@@ -178,6 +185,16 @@ function ListView() {
 
         });
     };
+
+    this.loading = function(component, value) {
+        var $component = $(component);
+
+        if (typeof value !== 'undefined') {
+            $component.toggleClass(classes.loading);
+        } else {
+            return $component.hasClass(classes.loading);
+        }
+    }; 
 
     this.modeLocked = function(component) {
         return typeof $(component).attr('data-' + dataKeys.modeLocked) !== 'undefined';

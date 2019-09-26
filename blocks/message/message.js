@@ -2,6 +2,8 @@
 var Component = require('component');
 
 function Message() {
+    fastredRequire('template');
+    
     this.template = 'message';
     this.selector = '.message';
 

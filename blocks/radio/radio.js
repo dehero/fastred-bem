@@ -1,6 +1,8 @@
 var Checkbox = require('checkbox');
 
 function Radio() {
+    fastredRequire('template');
+    
     this.template = 'radio';
     this.selector = '.radio';
 

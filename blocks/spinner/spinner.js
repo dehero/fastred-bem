@@ -1,12 +1,14 @@
 var Component = require('component');
 
 function Spinner() {
+    fastredRequire('template');
+    
     this.template = 'spinner';
     this.selector = '.spinner';
 
     var Spinner = this;
     var $ = require('jquery');
-
+ 
     var classes = {
         disabled: 'spinner_disabled'
     }

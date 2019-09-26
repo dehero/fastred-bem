@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Textarea() {
+    fastredRequire('template');
+    
     this.template = 'textarea';
     this.selector = '.textarea';
 

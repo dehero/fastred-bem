@@ -2,6 +2,8 @@ var Component = require('component');
 var json = require('item/item.json');
 
 function loadTypes() {
+    fastredRequire('var');
+
     var result = {};
 
     for (var key in json) {
@@ -17,6 +19,8 @@ function loadTypes() {
 }
 
 function Item() {
+    fastredRequire('template', 'var');
+
     this.template = 'item';
     this.selector = '.item';
     this.classSelected = 'item_selected';
@@ -151,13 +155,8 @@ function Item() {
 
     this.value = function(component) {
         var $component = $(component);
-        var result = $component.data('value');
 
-        if (typeof result === 'undefined') {
-            result = $component.index();
-        }
-
-        return result;
+        return $component.data('value');
     };
 
     Component.register(this);

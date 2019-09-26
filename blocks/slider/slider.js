@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Slider() {
+    fastredRequire('float', 'template', 'var');
+
     this.template = 'slider';
     this.selector = '.slider';
 

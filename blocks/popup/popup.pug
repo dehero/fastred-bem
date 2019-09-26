@@ -13,10 +13,11 @@
         - {bool} plain        
         - {bool} embed
         - {bool} loading
+        - {bool} expanse
         - {object} buttons               
             - {string} confirmTitle
             - {string} confirmIcon
-            - {string} cancelTitle
+            - {string} cancelTitle 
             - {string} cancelIcon
             - {string} width
             - {string} size
@@ -25,7 +26,7 @@
 
 - align = arrGetFound(['client', 'middle'], options.align, null)
 - width = arrGetFound(['s', 'l', 'xl'], options.width, null)
-- attributes.class = cssBemClassArr(attributes.class, {'popup_align_': align, 'popup_spring': options.spring, 'popup_plain': options.plain, 'popup_width_': width, 'popup_embed': options.embed, 'popup_loading': options.loading})
+- attributes.class = cssBemClassArr(attributes.class, {'popup_align_': align, 'popup_spring': options.spring, 'popup_plain': options.plain, 'popup_width_': width, 'popup_embed': options.embed, 'popup_loading': options.loading, 'popup_expanse': options.expanse})
 
 .popup&attributes(attributes)
     != templateToHtml('spinner', null, 'popup__spinner')

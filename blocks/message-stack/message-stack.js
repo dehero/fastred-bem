@@ -2,6 +2,8 @@
 var Component = require('component');
 
 function MessageStack() {
+    fastredRequire('template', 'var');
+
     this.template = 'message-stack';
     this.selector = '.message-stack';
 

@@ -1,6 +1,8 @@
 var Component = require('component');
 
 function Popup() {
+    fastredRequire('template');
+    
     this.template = 'popup';
     this.selector = '.popup';
     this.events = {
