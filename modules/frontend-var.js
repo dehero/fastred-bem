@@ -1,4 +1,6 @@
-window.frontendVar = function(key) {
+'use strict';
+
+exports.frontendVar = function(key) {
     fastredRequire('str', 'var');
 
     var

@@ -1,4 +1,8 @@
-window.localeGetStrObj = function() {
+'use strict';
+
+exports.localeGetStrObj = function() {
+    fastredRequire('cache');
+
     var key = locale();
 
     return cache('localeGetStrObj?' + key, function() {

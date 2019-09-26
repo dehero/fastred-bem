@@ -1,18 +1,18 @@
 'use strict';
 
-window.template = function(name, template) {
-    if (typeof(window._template) === 'undefined') {
-        window._template = [];
+exports.template = function(name, template) {
+    if (typeof(exports._template) === 'undefined') {
+        exports._template = [];
     }
 
     if (typeof template === 'function') {
-        window._template[name] = template;
+        exports._template[name] = template;
     }
 
-    return window._template[name];
+    return exports._template[name];
 };
 
-window.templateAttrsToObj = function(attributes) {
+exports.templateAttrsToObj = function(attributes) {
     fastredRequire('var');
 
     return varIsStr(attributes)
@@ -20,7 +20,7 @@ window.templateAttrsToObj = function(attributes) {
         : (varIsHash(attributes) ? attributes : {});
 }
 
-window.templateToHtml = function(name, options, attributes) {
+exports.templateToHtml = function(name, options, attributes) {
     fastredRequire('var');
 
     var render = template(name);

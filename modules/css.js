@@ -1,4 +1,8 @@
-window.cssBemClassArr = function() {
+'use strict';
+
+exports.cssBemClassArr = function() {
+    fastredRequire('str');
+
     var obj = cssClassObj.apply(this, arguments);
     var result = [];
 
