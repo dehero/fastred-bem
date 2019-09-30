@@ -43,7 +43,7 @@ function templateToHtml($input, $options = null, $attributes = null) {
     }
 
     try {
-        return $pug->render($path, $vars);
+        return $pug->renderFile($path, $vars);
     } catch(Exception $e) {
         return $path;
     }
