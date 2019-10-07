@@ -18,7 +18,8 @@ function Popup() {
         popup: 'popup'
     }
 
-    var selectors = {        
+    var selectors = {
+        buttons:    '.popup__buttons',
         content:    '.popup__content',
         hide:       '.popup__hide',
         status:     '.popup__status',
@@ -74,8 +75,6 @@ function Popup() {
 
     this.init = function(component) {
         var $component = $(component);
-        var $buttonHide = $component.find(selectors.hide);
-        var $buttonConfirm = $component.find(selectors.confirm);
 
         $component.click(function(e) {
             if (e.target !== this) return;
@@ -96,15 +95,15 @@ function Popup() {
             }
         });
 
-        $buttonConfirm.click(function(e) {
+        $component.on('click', selectors.confirm, function(e) {
             e.preventDefault();            
             Popup.confirm(component);
         });
 
-        $buttonHide.click(function(e) {
+        $component.on('click', selectors.hide, function(e) {
             e.preventDefault();
             Popup.hide(component);
-        });        
+        });      
     };
 
     this.confirm = function(component) {
@@ -116,6 +115,12 @@ function Popup() {
         if (!e.isDefaultPrevented()) {
             Popup.hide(component); 
         };        
+    };
+
+    this.buttons = function(component, value) {
+        var $popupButtons = $(component).find(selectors.buttons);
+
+        $popupButtons.html(templateToHtml('popup__buttons', value));
     };
 
     this.confirming = function(component, value) {

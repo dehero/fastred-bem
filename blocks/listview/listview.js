@@ -1,12 +1,12 @@
 var Component = require('component');
 
 function ListView() {
-    fastredRequire('arr', 'template');
+    fastredRequire('arr', 'template', 'var');
 
     this.template = 'listview';
     this.selector = '.listview';
 
-    var that = this;
+    var ListView = this;
     var $ = require('jquery');
     var selectors = {
         content:        '.listview__content',
@@ -39,14 +39,14 @@ function ListView() {
     template(this.template, require('listview/listview.pug'));
 
     this.add = function(component, items) {
-        that.insert(component, items, that.count(component));   
-        that.research(component);    
+        ListView.insert(component, items, ListView.count(component));   
+        ListView.research(component);    
     };
 
     this.canOpenSelection = function(component) {
         var $component = $(component);
         var ItemComponent = $component.data('ItemComponent');        
-        var items = that.getSelectedItems($component);
+        var items = ListView.getSelectedItems($component);
 
         return ItemComponent.canOpen(items.length == 1 ? items[0] : items);
     };
@@ -61,7 +61,7 @@ function ListView() {
     this.deleteSelection = function(component) {
         var $component = $(component);
         var ItemComponent = $component.data('ItemComponent');        
-        var items = that.getSelectedItems($component);
+        var items = ListView.getSelectedItems($component);
 
         ItemComponent.delete(items);
     };
@@ -92,7 +92,7 @@ function ListView() {
         var components = [];
 
         for(var i = 0; i < items.length; i++) {
-            components.push(ItemComponent.create({data: items[i], type: that.type(component)}));
+            components.push(ItemComponent.create({data: items[i], type: ListView.type(component)}));
         }
 
         if(position <= 0) {
@@ -104,7 +104,7 @@ function ListView() {
     };
 
     this.clearSelection = function(component, noEvent) {
-        that.selection(component, [], noEvent);
+        ListView.selection(component, [], noEvent);
     };
 
     this.count = function(component) {
@@ -120,13 +120,13 @@ function ListView() {
         $component.data('$content', $content);
         $component.data('$header', $header);
         $component.data('ItemComponent', ItemComponent);
-        that.research($component);
+        ListView.research($component);
 
         $component.keyup(function(e) {
             switch(e.keyCode) {
                 // DEL
                 case 46:
-                    that.deleteSelection(component);
+                    ListView.deleteSelection(component);
                     break;
             }
         });
@@ -140,8 +140,8 @@ function ListView() {
                 return;
             }
 
-            if (that.mode(component) === 'select') {
-                if (that.multiselect(component)) {
+            if (ListView.mode(component) === 'select') {
+                if (ListView.multiselect(component)) {
                     ItemComponent.selectedToggle(this);
                 } else {
                     ItemComponent.selected(this, true);
@@ -159,9 +159,9 @@ function ListView() {
                 $content.removeData(dataKeys.tapholdItem);
             });
 
-            if (that.mode(component) === 'browse' && !that.modeLocked(component)) {
-                that.mode(component, 'select');
-                if (that.multiselect(component)) {
+            if (ListView.mode(component) === 'browse' && !ListView.modeLocked(component)) {
+                ListView.mode(component, 'select');
+                if (ListView.multiselect(component)) {
                     ItemComponent.selectedToggle(this);
                 } else {
                     ItemComponent.selected(this, true);
@@ -172,13 +172,13 @@ function ListView() {
         });
 
         $content.on(ItemComponent.events.beforeSelectedChange, ItemComponent.selector, function(e) {
-            if (!that.multiselect(component)) {
-                that.clearSelection(component, true);
+            if (!ListView.multiselect(component)) {
+                ListView.clearSelection(component, true);
             }
         });
 
         $content.on(ItemComponent.events.selectedChange, ItemComponent.selector, function(e) {
-            $component.trigger(that.events.selectionChange);
+            $component.trigger(ListView.events.selectionChange);
         });
 
         $header.on(ItemComponent.events.sort, ItemComponent.selector, function(e, data) {
@@ -212,10 +212,10 @@ function ListView() {
             value = arrGetFound(['browse', 'select'], value, 'browse');
 
             if (value !== currentMode) {
-                that.clearSelection(component);
+                ListView.clearSelection(component);
                 $(component).data(dataKeys.mode, value);
 
-                $component.trigger(that.events.modeChange);                
+                $component.trigger(ListView.events.modeChange);                
             }
 
             return value;
@@ -227,7 +227,7 @@ function ListView() {
     this.openSelection = function(component) {
         var $component = $(component);
         var ItemComponent = $component.data('ItemComponent');        
-        var items = that.getSelectedItems($component);
+        var items = ListView.getSelectedItems($component);
 
         ItemComponent.open(items.length == 1 ? items[0] : items);
     };
@@ -236,7 +236,7 @@ function ListView() {
         var $component = $(component);
         var ItemComponent = $component.data('ItemComponent');
         var $content = $component.data('$content');
-        var oldValue = that.search($component);
+        var oldValue = ListView.search($component);
 
         $content.children().each(function() {
             ItemComponent.search(this, oldValue);
@@ -250,7 +250,7 @@ function ListView() {
         if (typeof value !== 'undefined') {    
             if (oldValue !== value) {
                 $component.data(dataKeys.search, value);
-                that.research(component);
+                ListView.research(component);
             }            
         } else {
             return oldValue;

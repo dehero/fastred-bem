@@ -31,9 +31,10 @@ function Form() {
 			$.each(value, function (key, value) {
 				var ctrl = $('[name=' + key + ']', component);
 				switch (ctrl.prop("type")) {
-					case "radio": case "checkbox":
+					case 'radio':
+					case 'checkbox':
 						ctrl.each(function () {
-							if ($(this).attr('value') == value) $(this).attr("checked", value);
+							if ($(this).attr('value') == value) $(this).attr('checked', value);
 						});
 						break;
 					default:

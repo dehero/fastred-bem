@@ -15,26 +15,26 @@ function templateAttrsToObj($attributes) {
 }
 
 function templateToHtml($input, $options = null, $attributes = null) {
-    fastredRequire('app', 'file', 'var');
+    fastredRequire('file', 'var');
 
     static $pug;
 
     if (!is_object($pug)) {
         $pug = new Pug\Pug([
-            'allowMixinOverride' => true,
-            'basedir' => TEMPLATE_PATH,
-            'prettyprint' => false,//!app()->debug,
-            'extension' => '.pug',
-            'expressionLanguage' => 'js',
             'cache' => TEMPLATE_CACHE_PATH,
+            'mixin_merge_mode' => 'replace',
+            'basedir' => TEMPLATE_PATH,
+            'pretty' => false,//!app()->debug,
+            'expressionLanguage' => 'js',
+            'strict' => true,
             'upToDateCheck' => TEMPLATE_CACHE_CHECK
         ]);
     }
 
-    $vars = array();
-    
-    $vars['options'] = varIsHash($options) ? $options : [];
-    $vars['attributes'] = templateAttrsToObj($attributes);
+    $vars = [
+        'options' => varIsHash($options) ? $options : [],
+        'attributes' => templateAttrsToObj($attributes)
+    ];
 
     $path = TEMPLATE_PATH . "$input.pug";
 
