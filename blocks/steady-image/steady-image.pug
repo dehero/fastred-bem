@@ -26,7 +26,7 @@ mixin content(options)
             img.steady-image__image(src=options.url title=options.title alt=options.description)
 
 if varIsNotEmpty(options.link)
-    a.steady-image(href=options.link style={'width': options.width + 'px'})&attributes(attributes)
+    a.steady-image(style={'width': options.width + 'px'} href=options.link)&attributes(attributes)
         +content(options)
 else
     div.steady-image(style={'width': options.width + 'px'})&attributes(attributes)
