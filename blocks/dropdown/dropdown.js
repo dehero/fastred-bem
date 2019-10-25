@@ -4,7 +4,7 @@ function Dropdown() {
     this.template = 'dropdown';
     this.selector = '.dropdown';
 
-    var that = this;
+    var Dropdown = this;
     var $ = require('jquery');
     var classes = {
         pressed: 'dropdown_pressed'
@@ -18,7 +18,7 @@ function Dropdown() {
     require('dropdown/dropdown.css.styl');
 
     $(window).click(function () {
-        that.hideAll();
+        Dropdown.hideAll();
     });
 
     this.init = function (component) {
@@ -37,7 +37,7 @@ function Dropdown() {
             e.stopPropagation();
             e.preventDefault();
 
-            that.toggle(component);
+            Dropdown.toggle(component);
         });
     }
 
@@ -47,8 +47,8 @@ function Dropdown() {
     }
 
     this.hideAll = function() {
-        $(that.selector).each(function() {
-            that.hide(this);
+        $(Dropdown.selector).each(function() {
+            Dropdown.hide(this);
         });
     }
 
@@ -56,16 +56,16 @@ function Dropdown() {
         var $component = $(component);             
 
         if ($component.hasClass(classes.pressed)) {
-            that.hide(component);
+            Dropdown.hide(component);
         } else {            
-            that.show(component);
+            Dropdown.show(component);
         }
     }
 
     this.show = function(component) {
         var $component = $(component);
 
-        that.hideAll();
+        Dropdown.hideAll();
         $component.addClass(classes.pressed);
     }
 
