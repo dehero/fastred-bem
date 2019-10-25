@@ -7,10 +7,13 @@ function Body() {
     var $ = require('jquery');
     var $body;
     var classes = {
+        headerHiding: 'body_header-hiding',
+        headerHide:   'body__header_hide',
         messageStack: 'body__message-stack',
         noScrollbar: 'body_scrollbar-override'
     };
     var selectors = {
+        header:       '.body__header',
         messageStack: '.body__message-stack'
     }
 
@@ -18,6 +21,27 @@ function Body() {
 
     this.init = function(component) {
         $body = $(component);
+
+        if ($body.hasClass(classes.headerHiding)) {
+            var $header = $(selectors.header);
+            var $window = $(window);
+            var lastScrollTop = 0;
+            var navbarHeight = $header.outerHeight();
+
+            $window.on('scroll', function(e) {                
+                var scrollTop = $window.scrollTop();
+    
+                if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
+                    // Scroll down
+                    $header.addClass(classes.headerHide);
+                } else if(scrollTop + $window.height() < $(document).height()) {
+                    // Scroll up
+                    $header.removeClass(classes.headerHide);
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        }     
     };
 
     this.message = function(messages) {

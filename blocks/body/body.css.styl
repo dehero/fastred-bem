@@ -39,3 +39,12 @@
       left 0
       right 0
       z-index 50
+  
+  &_header-hiding
+
+    .body__header
+      transition top 0.2s ease-in-out
+      top 0
+
+  .body__header_hide
+    top - $header__height
