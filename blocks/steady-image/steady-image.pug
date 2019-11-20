@@ -19,7 +19,7 @@ mixin content(options)
     div.steady-image__placeholder(style={'padding-bottom': floatToStr(heightPercent) + '%'})
     if varIsNotEmpty(options.url)
         if options.lazyload
-            img.steady-image__image(data-src=options.url)
+            img.steady-image__image(data-src=options.url title=options.title alt=options.description)
             noscript
                 img.steady-image__image(src=options.url title=options.title alt=options.description)
         else
