@@ -534,7 +534,7 @@ function FastredBemWebpackConfig(options) {
                 },
      */
                 {
-                    test: /locales\\.*\.(json)$/,
+                    test: /locales[\\\/].*\.json$/,
                     use: localePlugin.loader()
                 },
 
