@@ -1,8 +1,14 @@
-//- items
+//-@pugdoc
+    name: breadcrumbs
+    options:
+        - {array} items
+            - {string} title
+            - {string} url
 
-- fastredRequire('arr', 'obj')
+- fastredRequire('arr', 'var')
 
-- itemCount = arrGetCount(options.items)
+- itemCount = varIsArr(options.items) ? arrGetCount(options.items) : 0
+
 if itemCount > 1
     ul.breadcrumbs&attributes(attributes)
         - counter = 0
