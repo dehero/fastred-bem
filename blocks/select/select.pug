@@ -15,7 +15,7 @@
 - fastredRequire('css', 'template', 'var')
 
 - empty = options.value == ''
-- attributes.class = cssBemClassArr(attributes.class, {'select_spring': options.spring, 'select_size_': size, 'select_cut_': options.cut, 'select_empty': empty && options.allowEmpty})
+- attributes.class = cssBemClassArr(attributes.class, {'select_spring': options.spring, 'select_size_': options.size, 'select_cut_': options.cut, 'select_empty': empty && options.allowEmpty})
 
 mixin items(items, selectedValue)
     if varIsNumericArr(items)
