@@ -1,5 +1,37 @@
 var Component = require('component');
 
+function serializeArray() {
+	return this.map( function() {
+
+		// Can add propHook for "elements" to filter or add form elements
+		var elements = $.prop( this, "elements" );
+		return elements ? $.makeArray( elements ) : this;
+	} )
+	.filter( function() {
+		var type = this.type;
+
+		// Use .is( ":disabled" ) so that fieldset[disabled] works
+		return this.name && !$( this ).is( ":disabled" ) &&
+			rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
+			( this.checked || !rcheckableType.test( type ) );
+	} )
+	.map( function( _i, elem ) {
+		var val = $( this ).val();
+
+		if ( val == null ) {
+			return null;
+		}
+
+		if ( Array.isArray( val ) ) {
+			return $.map( val, function( val ) {
+				return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+			} );
+		}
+
+		return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+	} ).get();
+}
+
 function Form() {
 	fastredRequire('template');
 	
@@ -25,24 +57,53 @@ function Form() {
 	require('form/form.css.styl');
 	template('form__submit', require('form/form__submit.pug'));
 
-	this.data = function(component, value) {
+	this.data = function(component, value) {		
+		var CRLF = /\r?\n/g;
+		var submitterTypes = /^(?:submit|button|image|reset|file)$/i;
+		var submittable = /^(?:input|select|textarea|keygen)/i;
+		var checkableType = /^(?:checkbox|radio)$/i; 
+
 		if (typeof value !== 'undefined') {				
 			$(component)[0].reset();
 			$.each(value, function (key, value) {
 				var ctrl = $('[name=' + key + ']', component);
-				switch (ctrl.prop("type")) {
-					case 'radio':
-					case 'checkbox':
-						ctrl.each(function () {
-							if ($(this).attr('value') == value) $(this).attr('checked', value);
-						});
-						break;
-					default:
-						ctrl.val(value);
+				var type = ctrl.prop('type');
+
+				if (checkableType.test(type)) {
+					ctrl.each(function () {
+						if ($(this).attr('value') == value) $(this).attr('checked', value);
+					});
+				} else {
+					ctrl.val(value);
 				}
 			});
 		} else {
 			var result = {};
+
+			var nodes = $(component).map(function() {
+				var elements = $.prop(this, 'elements');
+				return elements ? $.makeArray(elements) : this;
+			})
+			.filter(function() {
+				var type = this.type;
+		
+				return this.name && submittable.test( this.nodeName ) && !submitterTypes.test( type ) &&
+					( this.checked || !checkableType.test( type ) );
+			})
+			.map(function(i, elem) {
+				var val = $(this).val();
+		
+				if (val == null) { return null; }
+		
+				if (Array.isArray(val)) {
+					return $.map(val, function(val) {
+						return { name: elem.name, value: val.replace(CRLF, '\r\n') };
+					} );
+				}
+		
+				return { name: elem.name, value: val.replace(CRLF, '\r\n') };
+			}).get();
+
 			var extend = function (i, element) {
 				var node = result[element.name];
 
@@ -57,7 +118,7 @@ function Form() {
 				}
 			};
 
-			$.each($(component).serializeArray(), extend);
+			$.each(nodes, extend);
 
 			return result;
 		}
