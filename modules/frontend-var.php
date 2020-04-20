@@ -14,7 +14,7 @@ function frontendVar($key) {
     $vars = objFromJsonFileCached(FRONTEND_VAR_FILEPATH);
     $units = ['rem', 'px', 'ms', 's'];
 
-    $value = $vars->{$key};
+    $value = isset($vars->{$key}) ? $vars->{$key} : null;
 
     if (varIsStr($value)) {
         $float = (float)$value;
