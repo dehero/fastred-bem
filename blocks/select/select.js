@@ -55,6 +55,7 @@ function Select() {
         $component.data(dataKeys.$control, $control);
 
         $control.change(function(e) {
+            e.stopPropagation();
             $component.toggleClass(classes.empty, Input.value($control) == '');
             $component.trigger(that.events.change);
         });
