@@ -1,37 +1,5 @@
 var Component = require('component');
 
-function serializeArray() {
-	return this.map( function() {
-
-		// Can add propHook for "elements" to filter or add form elements
-		var elements = $.prop( this, "elements" );
-		return elements ? $.makeArray( elements ) : this;
-	} )
-	.filter( function() {
-		var type = this.type;
-
-		// Use .is( ":disabled" ) so that fieldset[disabled] works
-		return this.name && !$( this ).is( ":disabled" ) &&
-			rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
-			( this.checked || !rcheckableType.test( type ) );
-	} )
-	.map( function( _i, elem ) {
-		var val = $( this ).val();
-
-		if ( val == null ) {
-			return null;
-		}
-
-		if ( Array.isArray( val ) ) {
-			return $.map( val, function( val ) {
-				return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
-			} );
-		}
-
-		return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
-	} ).get();
-}
-
 function Form() {
 	fastredRequire('template');
 	
@@ -87,21 +55,26 @@ function Form() {
 			.filter(function() {
 				var type = this.type;
 		
-				return this.name && submittable.test( this.nodeName ) && !submitterTypes.test( type ) &&
-					( this.checked || !checkableType.test( type ) );
+				return this.name && submittable.test(this.nodeName) && !submitterTypes.test(type) &&
+					(this.checked || type !== 'radio');
 			})
 			.map(function(i, elem) {
+				var type = this.type;
 				var val = $(this).val();
-		
-				if (val == null) { return null; }
-		
-				if (Array.isArray(val)) {
+
+				if (type === 'checkbox') {
+					val = this.checked ? val : null;
+				} else if (val === null) {
+					return null;
+				} else if (Array.isArray(val)) {
 					return $.map(val, function(val) {
 						return { name: elem.name, value: val.replace(CRLF, '\r\n') };
-					} );
+					});
+				} else {
+					val = val.replace(CRLF, '\r\n');
 				}
-		
-				return { name: elem.name, value: val.replace(CRLF, '\r\n') };
+
+				return { name: elem.name, value: val };				
 			}).get();
 
 			var extend = function (i, element) {
@@ -169,4 +142,4 @@ function Form() {
 
 Form.prototype = Component;
 
-module.exports = new Form(); 
+module.exports = new Form();
