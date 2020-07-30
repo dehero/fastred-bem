@@ -28,6 +28,10 @@
     height $checkbox__size    
     background $checkbox__bg
     border-radius $checkbox__border-radius
+    if $checkbox__border-size > 0
+      border $checkbox__border-size solid $checkbox__border-color
+    else
+      border none    
     position absolute
 
 .checkbox__input
