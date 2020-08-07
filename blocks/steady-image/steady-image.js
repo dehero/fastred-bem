@@ -22,7 +22,7 @@ function SteadyImage() {
         $(component).filter(selectors.lazyload).one('inview', function() {
             var $img = $(this).find(selectors.image);
             var src = $img.data('src');
-            var src = $img.data('srcset');
+            var srcset = $img.data('srcset');
 
             if (src) {
                 $img.fadeOut(0);
