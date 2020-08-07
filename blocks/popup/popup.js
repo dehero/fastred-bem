@@ -34,7 +34,8 @@ function Popup() {
         visible:    'popup_visible',
         hiding:     'popup_hiding',
         showing:    'popup_showing',
-        loading:    'popup_loading'
+        loading:    'popup_loading',
+        plain:      'popup_plain'        
     }; 
 
     require('spinner');
@@ -154,11 +155,21 @@ function Popup() {
         var $component = $(component);
 
         if (typeof value !== 'undefined') {
-            $component.toggleClass(classes.loading);
+            $component.toggleClass(classes.loading, value);
         } else {
             return $component.hasClass(classes.loading);
         }
     };
+
+    this.plain = function(component, value) {
+        var $component = $(component);
+
+        if (typeof value !== 'undefined') {
+            $component.toggleClass(classes.plain, value);
+        } else {
+            return $component.hasClass(classes.plain);
+        }
+    }
 
     this.status = function(component, value) {
         var $component = $(component);
