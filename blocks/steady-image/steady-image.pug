@@ -1,12 +1,13 @@
 //- @pugdoc
     name: steady-image
     options:
-        - {string} url
+        - {string} src
+        - {string} srcset
         - {number} width
         - {number} height
         - {bool} lazyload
         - {bool} responsive
-        - {string} link
+        - {string} url
         - {string} description
         - {string} title
 
@@ -17,16 +18,16 @@
 mixin content(options)
     - heightPercent = floatGetRound(options.height / options.width * 100)
     div.steady-image__placeholder(style={'padding-bottom': floatToStr(heightPercent) + '%'})
-    if varIsNotEmpty(options.url)
+    if varIsNotEmpty(options.src)
         if options.lazyload
-            img.steady-image__image(data-src=options.url src='data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=' title=options.title alt=options.description)
+            img.steady-image__image(data-src=options.src data-srcset=options.srcset src='data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=' title=options.title alt=options.description)
             noscript
-                img.steady-image__image(src=options.url title=options.title alt=options.description)
+                img.steady-image__image(src=options.src srcset=options.srcset title=options.title alt=options.description)
         else
-            img.steady-image__image(src=options.url title=options.title alt=options.description)
+            img.steady-image__image(src=options.src srcset=options.srcset title=options.title alt=options.description)
 
-if varIsNotEmpty(options.link)
-    a.steady-image(href=options.link style={'width': options.width + 'px'})&attributes(attributes)
+if varIsNotEmpty(options.url)
+    a.steady-image(href=options.url style={'width': options.width + 'px'})&attributes(attributes)
         +content(options)
 else
     div.steady-image(style={'width': options.width + 'px'})&attributes(attributes)
