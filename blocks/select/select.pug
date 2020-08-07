@@ -28,7 +28,7 @@ mixin items(items, selectedValue)
 .select&attributes(attributes)
     select.select__control(disabled=options.disabled name=options.name)
         if options.allowEmpty
-            option(value selected=empty).select__item.select__item_placeholder= options.placeholder
+            option(value='' selected=empty).select__item.select__item_placeholder= options.placeholder
         if options.items
             +items(options.items, options.value)
         if options.groups
